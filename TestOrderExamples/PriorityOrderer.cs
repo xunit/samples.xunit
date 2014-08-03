@@ -14,7 +14,7 @@ public class PriorityOrderer : ITestCaseOrderer
         {
             int priority = 0;
 
-            foreach (IAttributeInfo attr in testCase.Method.GetCustomAttributes((typeof (TestPriorityAttribute))))
+            foreach (IAttributeInfo attr in testCase.TestMethod.Method.GetCustomAttributes((typeof (TestPriorityAttribute))))
                 priority = attr.GetNamedArgument<int>("Priority");
 
             GetOrCreate(sortedMethods, priority).Add(testCase);
@@ -22,7 +22,7 @@ public class PriorityOrderer : ITestCaseOrderer
 
         foreach (var list in sortedMethods.Keys.Select(priority => sortedMethods[priority]))
         {
-            list.Sort((x, y) => StringComparer.OrdinalIgnoreCase.Compare(x.Method.Name, y.Method.Name));
+            list.Sort((x, y) => StringComparer.OrdinalIgnoreCase.Compare(x.TestMethod.Method.Name, y.TestMethod.Method.Name));
             foreach (TTestCase testCase in list)
                 yield return testCase;
         }

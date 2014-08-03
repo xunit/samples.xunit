@@ -10,7 +10,7 @@ public class AlphabeticalOrderer : ITestCaseOrderer
             where TTestCase : ITestCase
     {
         var result = testCases.ToList();
-        result.Sort((x, y) => StringComparer.OrdinalIgnoreCase.Compare(x.Method.Name, y.Method.Name));
+        result.Sort((x, y) => StringComparer.OrdinalIgnoreCase.Compare(x.TestMethod.Method.Name, y.TestMethod.Method.Name));
         return result;
     }
 }
