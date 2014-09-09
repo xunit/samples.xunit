@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stack", "Stack\Stack.csproj", "{E435A244-244A-45C3-B190-A05128219E4A}"
 EndProject
@@ -26,6 +26,15 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassFixtureExample", "ClassFixtureExample\ClassFixtureExample.csproj", "{CE72BD12-249B-4561-83B5-FCA7287D8700}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestOrderExamples", "TestOrderExamples\TestOrderExamples.csproj", "{AF83CCA8-3DD0-4E64-991E-B8F0141B9322}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{93AEFA56-518F-4054-A091-356E24F61125}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObservationExample", "ObservationExample\ObservationExample.csproj", "{03D5A611-AD3A-4035-BA59-3E0875F8E359}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -79,6 +88,10 @@ Global
 		{AF83CCA8-3DD0-4E64-991E-B8F0141B9322}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF83CCA8-3DD0-4E64-991E-B8F0141B9322}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF83CCA8-3DD0-4E64-991E-B8F0141B9322}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03D5A611-AD3A-4035-BA59-3E0875F8E359}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03D5A611-AD3A-4035-BA59-3E0875F8E359}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03D5A611-AD3A-4035-BA59-3E0875F8E359}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03D5A611-AD3A-4035-BA59-3E0875F8E359}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
