@@ -24,14 +24,6 @@ public class AsyncExamples
         Assert.IsType<NotImplementedException>(ex);
     }
 
-    [Fact]
-    public async void CodeDoesNotThrow()
-    {
-        Func<Task> testCode = () => Task.Factory.StartNew(() => { });
-
-        await Assert.DoesNotThrowAsync(testCode);
-    }
-
     void ThrowingMethod()
     {
         throw new NotImplementedException();

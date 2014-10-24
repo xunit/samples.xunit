@@ -36,6 +36,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{93AEFA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObservationExample", "ObservationExample\ObservationExample.csproj", "{03D5A611-AD3A-4035-BA59-3E0875F8E359}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetryFactExample", "RetryFactExample\RetryFactExample.csproj", "{5AD2818A-7A08-4F11-904F-221ED4304258}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -92,6 +94,10 @@ Global
 		{03D5A611-AD3A-4035-BA59-3E0875F8E359}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03D5A611-AD3A-4035-BA59-3E0875F8E359}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03D5A611-AD3A-4035-BA59-3E0875F8E359}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AD2818A-7A08-4F11-904F-221ED4304258}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AD2818A-7A08-4F11-904F-221ED4304258}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AD2818A-7A08-4F11-904F-221ED4304258}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AD2818A-7A08-4F11-904F-221ED4304258}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
