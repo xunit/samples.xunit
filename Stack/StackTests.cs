@@ -59,7 +59,7 @@ public class StackTests
         }
 
         [Fact]
-        public void Peek_ShouldThrowInvalidOperationException()
+        public void Peek_ThrowInvalidOperationException()
         {
             Exception exception = Record.Exception(() => stack.Peek());
 
