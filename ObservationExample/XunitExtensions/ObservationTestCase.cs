@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit.Abstractions;
@@ -10,6 +11,10 @@ namespace XunitExtensions
     public class ObservationTestCase : TestMethodTestCase
     {
         public ObservationTestCase(ITestMethod testMethod) : base(testMethod) { }
+
+        /// <inheritdoc/>
+        protected ObservationTestCase(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
 
         /// <inheritdoc/>
         protected override void Initialize()

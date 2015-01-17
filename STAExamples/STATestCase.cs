@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.Serialization;
+using System.Security;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit.Abstractions;
@@ -15,7 +16,7 @@ namespace STAExamples
     /// </summary>
     [Serializable]
     [DebuggerDisplay(@"\{ class = {TestMethod.TestClass.Class.Name}, method = {TestMethod.Method.Name}, display = {DisplayName}, skip = {SkipReason} \}")]
-    public class STATestCase : IXunitTestCase
+    public class STATestCase : IXunitTestCase, ISerializable
     {
         private readonly IXunitTestCase testCase;
 
@@ -27,13 +28,12 @@ namespace STAExamples
         /// <summary/>
         [EditorBrowsable(EditorBrowsableState.Never)]
         [Obsolete("Called by the de-serializer", error: true)]
-        public STATestCase()
-        {
-        }
+        public STATestCase() { }
 
         /// <inheritdoc />
         protected STATestCase(SerializationInfo info, StreamingContext context)
         {
+            testCase = (IXunitTestCase)info.GetValue("InnerTestCase", typeof(IXunitTestCase));
         }
 
         public IMethodInfo Method
@@ -42,7 +42,7 @@ namespace STAExamples
         }
 
         public Task<RunSummary> RunAsync(IMessageBus messageBus, object[] constructorArguments,
-            ExceptionAggregator aggregator, System.Threading.CancellationTokenSource cancellationTokenSource)
+            ExceptionAggregator aggregator, CancellationTokenSource cancellationTokenSource)
         {
             var tcs = new TaskCompletionSource<RunSummary>();
             var thread = new Thread(() =>
@@ -97,6 +97,12 @@ namespace STAExamples
         public string UniqueID
         {
             get { return testCase.UniqueID; }
+        }
+
+        [SecurityCritical]
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("InnerTestCase", testCase);
         }
     }
 }
