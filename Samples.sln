@@ -38,6 +38,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetryFactExample", "RetryFa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "STAExamples", "STAExamples\STAExamples.csproj", "{F0634DD7-C36B-4CF7-8D50-F8CE969720C3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestOutputExample", "TestOutputExample\TestOutputExample.csproj", "{57D342C0-2984-4303-B4F1-A055A5C029B9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -98,6 +100,10 @@ Global
 		{F0634DD7-C36B-4CF7-8D50-F8CE969720C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F0634DD7-C36B-4CF7-8D50-F8CE969720C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F0634DD7-C36B-4CF7-8D50-F8CE969720C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57D342C0-2984-4303-B4F1-A055A5C029B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57D342C0-2984-4303-B4F1-A055A5C029B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57D342C0-2984-4303-B4F1-A055A5C029B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57D342C0-2984-4303-B4F1-A055A5C029B9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
