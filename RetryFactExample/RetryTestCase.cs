@@ -18,8 +18,8 @@ namespace RetryFactExample
         [Obsolete("Called by the de-serializer", true)]
         public RetryTestCase() { }
 
-        public RetryTestCase(ITestMethod testMethod, int maxRetries)
-            : base(testMethod, testMethodArguments: null)
+        public RetryTestCase(TestMethodDisplay testMethodDisplay, ITestMethod testMethod, int maxRetries)
+            : base(testMethodDisplay, testMethod, testMethodArguments: null)
         {
             this.maxRetries = maxRetries;
         }

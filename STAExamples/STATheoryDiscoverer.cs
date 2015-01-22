@@ -9,9 +9,9 @@ namespace STAExamples
     {
         private readonly TheoryDiscoverer theoryDiscoverer = new TheoryDiscoverer();
 
-        public IEnumerable<IXunitTestCase> Discover(ITestMethod testMethod, IAttributeInfo factAttribute)
+        public IEnumerable<IXunitTestCase> Discover(ITestFrameworkDiscoveryOptions discoveryOptions, ITestMethod testMethod, IAttributeInfo factAttribute)
         {
-            return theoryDiscoverer.Discover(testMethod, factAttribute)
+            return theoryDiscoverer.Discover(discoveryOptions, testMethod, factAttribute)
                 .Select(testCase => new STATestCase(testCase));
         }
     }

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stack", "Stack\Stack.csproj", "{E435A244-244A-45C3-B190-A05128219E4A}"
 EndProject
@@ -93,7 +93,6 @@ Global
 		{AF83CCA8-3DD0-4E64-991E-B8F0141B9322}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF83CCA8-3DD0-4E64-991E-B8F0141B9322}.Release|Any CPU.Build.0 = Release|Any CPU
 		{03D5A611-AD3A-4035-BA59-3E0875F8E359}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{03D5A611-AD3A-4035-BA59-3E0875F8E359}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03D5A611-AD3A-4035-BA59-3E0875F8E359}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03D5A611-AD3A-4035-BA59-3E0875F8E359}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5AD2818A-7A08-4F11-904F-221ED4304258}.Debug|Any CPU.ActiveCfg = Debug|Any CPU

@@ -6,13 +6,13 @@ namespace RetryFactExample
 {
     public class RetryFactDiscoverer : IXunitTestCaseDiscoverer
     {
-        public IEnumerable<IXunitTestCase> Discover(ITestMethod testMethod, IAttributeInfo factAttribute)
+        public IEnumerable<IXunitTestCase> Discover(ITestFrameworkDiscoveryOptions discoveryOptions, ITestMethod testMethod, IAttributeInfo factAttribute)
         {
             var maxRetries = factAttribute.GetNamedArgument<int>("MaxRetries");
             if (maxRetries < 1)
                 maxRetries = 3;
 
-            yield return new RetryTestCase(testMethod, maxRetries);
+            yield return new RetryTestCase(discoveryOptions.MethodDisplay(), testMethod, maxRetries);
         }
     }
 }

@@ -6,9 +6,10 @@ namespace STAExamples
 {
     public class STAFactDiscoverer : IXunitTestCaseDiscoverer
     {
-        public IEnumerable<IXunitTestCase> Discover(ITestMethod testMethod, IAttributeInfo factAttribute)
+        public IEnumerable<IXunitTestCase> Discover(ITestFrameworkDiscoveryOptions discoveryOptions, ITestMethod testMethod, IAttributeInfo factAttribute)
         {
-            yield return new STATestCase(new XunitTestCase(testMethod));
+            var xUnitTestCase = new XunitTestCase(discoveryOptions.MethodDisplay(), testMethod, new object[] { }); 
+            yield return new STATestCase(xUnitTestCase);
         }
     }
 }
