@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stack", "Stack\Stack.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssertExamples", "AssertExamples\AssertExamples.csproj", "{0435F191-D593-4DF3-8CED-A5721F0BB30D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TracingExample", "TracingExample\TracingExample.csproj", "{6D17B94D-4FE1-4C31-ADFC-4F6A5BD8CA70}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TraitExtensibility", "TraitExtensibility\TraitExtensibility.csproj", "{EF2D8F8C-2855-4D6D-A3FF-62FF6C9BE855}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpecificationExamples", "SpecificationExamples\SpecificationExamples.csproj", "{91AACDDE-2958-445F-A6CD-7695CD9CDF61}"
@@ -54,9 +52,6 @@ Global
 		{0435F191-D593-4DF3-8CED-A5721F0BB30D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0435F191-D593-4DF3-8CED-A5721F0BB30D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0435F191-D593-4DF3-8CED-A5721F0BB30D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6D17B94D-4FE1-4C31-ADFC-4F6A5BD8CA70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6D17B94D-4FE1-4C31-ADFC-4F6A5BD8CA70}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6D17B94D-4FE1-4C31-ADFC-4F6A5BD8CA70}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EF2D8F8C-2855-4D6D-A3FF-62FF6C9BE855}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EF2D8F8C-2855-4D6D-A3FF-62FF6C9BE855}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF2D8F8C-2855-4D6D-A3FF-62FF6C9BE855}.Release|Any CPU.ActiveCfg = Release|Any CPU
