@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Runtime.Serialization;
-using System.Security;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit.Abstractions;
@@ -14,11 +12,10 @@ namespace STAExamples
     /// <summary>
     /// Wraps test cases for FactAttribute and TheoryAttribute so the test case runs in the STA Thread
     /// </summary>
-    [Serializable]
     [DebuggerDisplay(@"\{ class = {TestMethod.TestClass.Class.Name}, method = {TestMethod.Method.Name}, display = {DisplayName}, skip = {SkipReason} \}")]
-    public class STATestCase : IXunitTestCase, ISerializable
+    public class STATestCase : LongLivedMarshalByRefObject, IXunitTestCase
     {
-        private readonly IXunitTestCase testCase;
+        IXunitTestCase testCase;
 
         public STATestCase(IXunitTestCase testCase)
         {
@@ -29,12 +26,6 @@ namespace STAExamples
         [EditorBrowsable(EditorBrowsableState.Never)]
         [Obsolete("Called by the de-serializer", error: true)]
         public STATestCase() { }
-
-        /// <inheritdoc />
-        protected STATestCase(SerializationInfo info, StreamingContext context)
-        {
-            testCase = (IXunitTestCase)info.GetValue("InnerTestCase", typeof(IXunitTestCase));
-        }
 
         public IMethodInfo Method
         {
@@ -99,8 +90,12 @@ namespace STAExamples
             get { return testCase.UniqueID; }
         }
 
-        [SecurityCritical]
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        public void Deserialize(IXunitSerializationInfo info)
+        {
+            testCase = info.GetValue<IXunitTestCase>("InnerTestCase");
+        }
+
+        public void Serialize(IXunitSerializationInfo info)
         {
             info.AddValue("InnerTestCase", testCase);
         }

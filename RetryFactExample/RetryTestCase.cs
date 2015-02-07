@@ -1,11 +1,9 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Runtime.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit.Abstractions;
 using Xunit.Sdk;
-using Xunit.Serialization;
 
 namespace RetryFactExample
 {
@@ -50,36 +48,18 @@ namespace RetryFactExample
             }
         }
 
-        ///////////////////////////////////////////////////////////////////
-        // Serialization code
-
-        // TODO: Can we do something about the doubled up code here?
-
-        public override void GetData(XunitSerializationInfo data)
+        public override void Serialize(IXunitSerializationInfo data)
         {
-            base.GetData(data);
+            base.Serialize(data);
 
             data.AddValue("MaxRetries", maxRetries);
         }
 
-        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        public override void Deserialize(IXunitSerializationInfo data)
         {
-            base.GetObjectData(info, context);
+            base.Deserialize(data);
 
-            info.AddValue("MaxRetries", maxRetries);
-        }
-
-        protected RetryTestCase(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-            maxRetries = info.GetInt32("MaxRetries");
-        }
-
-        public override void SetData(XunitSerializationInfo data)
-        {
-            base.SetData(data);
-
-            maxRetries = (int)data.GetValue("MaxRetries", typeof(int));
+            maxRetries = data.GetValue<int>("MaxRetries");
         }
     }
 }

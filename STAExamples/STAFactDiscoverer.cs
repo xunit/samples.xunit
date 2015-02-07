@@ -8,8 +8,8 @@ namespace STAExamples
     {
         public IEnumerable<IXunitTestCase> Discover(ITestFrameworkDiscoveryOptions discoveryOptions, ITestMethod testMethod, IAttributeInfo factAttribute)
         {
-            var xUnitTestCase = new XunitTestCase(discoveryOptions.MethodDisplay(), testMethod, new object[] { }); 
-            yield return new STATestCase(xUnitTestCase);
+            var xUnitTestCase = new XunitTestCase(discoveryOptions.MethodDisplayOrDefault(), testMethod, new object[] { });
+            return new IXunitTestCase[] { new STATestCase(xUnitTestCase) };
         }
     }
 }

@@ -12,7 +12,7 @@ namespace RetryFactExample
             if (maxRetries < 1)
                 maxRetries = 3;
 
-            yield return new RetryTestCase(discoveryOptions.MethodDisplay(), testMethod, maxRetries);
+            yield return new RetryTestCase(discoveryOptions.MethodDisplayOrDefault(), testMethod, maxRetries);
         }
     }
 }
