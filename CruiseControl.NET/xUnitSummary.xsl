@@ -58,7 +58,7 @@
         <br />
         <div><a name="all"></a><b><u>All tests</u></b></div>
         <div class="header5">Click test class name to expand/collapse test details</div>
-        <xsl:apply-templates select="//assembly/class"><xsl:sort select="@name"/></xsl:apply-templates>
+        <xsl:apply-templates select="//assembly/class | //assembly/collection"><xsl:sort select="@name"/></xsl:apply-templates>
       </td>
     </tr>
   </xsl:template>
@@ -89,7 +89,7 @@
     <pre><xsl:value-of select="stack-trace"/></pre>
   </xsl:template>
 
-  <xsl:template match="class">
+  <xsl:template match="class | collection">
     <div class="header3">
       <span class="timing"><xsl:value-of select="@time"/>s</span>
       <span class="clickable">
