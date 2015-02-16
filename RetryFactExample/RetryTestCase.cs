@@ -16,8 +16,8 @@ namespace RetryFactExample
         [Obsolete("Called by the de-serializer", true)]
         public RetryTestCase() { }
 
-        public RetryTestCase(TestMethodDisplay testMethodDisplay, ITestMethod testMethod, int maxRetries)
-            : base(testMethodDisplay, testMethod, testMethodArguments: null)
+        public RetryTestCase(IMessageSink diagnosticMessageSink, TestMethodDisplay testMethodDisplay, ITestMethod testMethod, int maxRetries)
+            : base(diagnosticMessageSink, testMethodDisplay, testMethod, testMethodArguments: null)
         {
             this.maxRetries = maxRetries;
         }
@@ -26,7 +26,8 @@ namespace RetryFactExample
         // loop here, forwarding on to the implementation in XunitTestCase to do the heavy lifting. We will
         // continue to re-run the test until the aggregator has an error (meaning that some internal error
         // condition happened), or the test runs without failure, or we've hit the maximum number of tries.
-        public override async Task<RunSummary> RunAsync(IMessageBus messageBus,
+        public override async Task<RunSummary> RunAsync(IMessageSink diagnosticMessageSink,
+                                                        IMessageBus messageBus,
                                                         object[] constructorArguments,
                                                         ExceptionAggregator aggregator,
                                                         CancellationTokenSource cancellationTokenSource)
@@ -39,12 +40,14 @@ namespace RetryFactExample
                 // contain run status) until we know we've decided to accept the final result;
                 var delayedMessageBus = new DelayedMessageBus(messageBus);
 
-                var summary = await base.RunAsync(delayedMessageBus, constructorArguments, aggregator, cancellationTokenSource);
+                var summary = await base.RunAsync(diagnosticMessageSink, delayedMessageBus, constructorArguments, aggregator, cancellationTokenSource);
                 if (aggregator.HasExceptions || summary.Failed == 0 || ++runCount >= maxRetries)
                 {
                     delayedMessageBus.Dispose();  // Sends all the delayed messages
                     return summary;
                 }
+
+                diagnosticMessageSink.OnMessage(new DiagnosticMessage("Execution of '{0}' failed (attempt #{1}), retrying...", DisplayName, runCount));
             }
         }
 

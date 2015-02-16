@@ -32,7 +32,7 @@ namespace STAExamples
             get { return testCase.Method; }
         }
 
-        public Task<RunSummary> RunAsync(IMessageBus messageBus, object[] constructorArguments,
+        public Task<RunSummary> RunAsync(IMessageSink diagnosticMessageSink, IMessageBus messageBus, object[] constructorArguments,
             ExceptionAggregator aggregator, CancellationTokenSource cancellationTokenSource)
         {
             var tcs = new TaskCompletionSource<RunSummary>();
@@ -40,7 +40,7 @@ namespace STAExamples
             {
                 try
                 {
-                    var testCaseTask = testCase.RunAsync(messageBus, constructorArguments, aggregator,
+                    var testCaseTask = testCase.RunAsync(diagnosticMessageSink, messageBus, constructorArguments, aggregator,
                         cancellationTokenSource);
                     tcs.SetResult(testCaseTask.Result);
                 }

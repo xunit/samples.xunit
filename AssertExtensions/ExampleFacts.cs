@@ -30,7 +30,7 @@ public class ExampleFacts
 
             Exception exception = Record.Exception(() => val.ShouldBeTrue("should be true"));
 
-            Assert.Equal("should be true", exception.Message); 
+            Assert.StartsWith("should be true", exception.Message); 
         }
 
         [Fact]
@@ -40,7 +40,7 @@ public class ExampleFacts
 
             Exception exception = Record.Exception(() => val.ShouldBeFalse("should be false"));
 
-            Assert.Equal("should be false", exception.Message);
+            Assert.StartsWith("should be false", exception.Message);
         }
     }
 }
