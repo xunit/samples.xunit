@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssertExamples", "AssertExa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TraitExtensibility", "TraitExtensibility\TraitExtensibility.csproj", "{EF2D8F8C-2855-4D6D-A3FF-62FF6C9BE855}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpecificationExamples", "SpecificationExamples\SpecificationExamples.csproj", "{91AACDDE-2958-445F-A6CD-7695CD9CDF61}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssertExtensions", "AssertExtensions\AssertExtensions.csproj", "{532166A3-1043-4167-9E7C-2A02AE2BB2C0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssumeIdentity", "AssumeIdentity\AssumeIdentity.csproj", "{0EC0B748-428D-4B1C-9790-CFBDD346ECE8}"
@@ -58,9 +56,6 @@ Global
 		{EF2D8F8C-2855-4D6D-A3FF-62FF6C9BE855}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF2D8F8C-2855-4D6D-A3FF-62FF6C9BE855}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EF2D8F8C-2855-4D6D-A3FF-62FF6C9BE855}.Release|Any CPU.Build.0 = Release|Any CPU
-		{91AACDDE-2958-445F-A6CD-7695CD9CDF61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{91AACDDE-2958-445F-A6CD-7695CD9CDF61}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{91AACDDE-2958-445F-A6CD-7695CD9CDF61}.Release|Any CPU.Build.0 = Release|Any CPU
 		{532166A3-1043-4167-9E7C-2A02AE2BB2C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{532166A3-1043-4167-9E7C-2A02AE2BB2C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{532166A3-1043-4167-9E7C-2A02AE2BB2C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
