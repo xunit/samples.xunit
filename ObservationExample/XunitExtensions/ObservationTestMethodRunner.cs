@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit.Abstractions;
@@ -11,7 +10,14 @@ namespace XunitExtensions
     {
         readonly Specification specification;
 
-        public ObservationTestMethodRunner(Specification specification, ITestMethod testMethod, IReflectionTypeInfo @class, IReflectionMethodInfo method, IEnumerable<ObservationTestCase> testCases, IMessageBus messageBus, ExceptionAggregator aggregator, CancellationTokenSource cancellationTokenSource)
+        public ObservationTestMethodRunner(Specification specification,
+                                           ITestMethod testMethod,
+                                           IReflectionTypeInfo @class,
+                                           IReflectionMethodInfo method,
+                                           IEnumerable<ObservationTestCase> testCases,
+                                           IMessageBus messageBus,
+                                           ExceptionAggregator aggregator,
+                                           CancellationTokenSource cancellationTokenSource)
             : base(testMethod, @class, method, testCases, messageBus, aggregator, cancellationTokenSource)
         {
             this.specification = specification;

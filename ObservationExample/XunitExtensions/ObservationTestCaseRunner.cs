@@ -21,14 +21,14 @@ namespace XunitExtensions
             this.displayName = displayName;
         }
 
-        /// <inheritdoc/>
         protected override Task<RunSummary> RunTestAsync()
         {
             var timer = new ExecutionTimer();
             var TestClass = TestCase.TestMethod.TestClass.Class.ToRuntimeType();
             var TestMethod = TestCase.TestMethod.Method.ToRuntimeMethod();
+            var test = new ObservationTest(TestCase, displayName);
 
-            return new ObservationTestRunner(TestCase, specification, MessageBus, timer, TestClass, TestMethod, displayName, Aggregator, CancellationTokenSource).RunAsync();
+            return new ObservationTestRunner(specification, test, MessageBus, timer, TestClass, TestMethod, Aggregator, CancellationTokenSource).RunAsync();
         }
     }
 }

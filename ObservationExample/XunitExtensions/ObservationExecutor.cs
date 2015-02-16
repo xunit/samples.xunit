@@ -8,24 +8,23 @@ namespace XunitExtensions
 {
     public class ObservationExecutor : TestFrameworkExecutor<ObservationTestCase>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ObservationExecutor"/> class.
-        /// </summary>
-        /// <param name="assemblyName">Name of the test assembly.</param>
-        /// <param name="sourceInformationProvider">The source line number information provider.</param>
-        public ObservationExecutor(AssemblyName assemblyName, ISourceInformationProvider sourceInformationProvider)
-            : base(assemblyName, sourceInformationProvider) { }
+        public ObservationExecutor(AssemblyName assemblyName,
+                                   ISourceInformationProvider sourceInformationProvider,
+                                   IMessageSink diagnosticMessageSink)
+            : base(assemblyName, sourceInformationProvider, diagnosticMessageSink) { }
 
         protected override ITestFrameworkDiscoverer CreateDiscoverer()
         {
-            return new ObservationDiscoverer(AssemblyInfo, SourceInformationProvider);
+            return new ObservationDiscoverer(AssemblyInfo, SourceInformationProvider, DiagnosticMessageSink);
         }
 
-        protected override async void RunTestCases(IEnumerable<ObservationTestCase> testCases, IMessageSink messageSink, ITestFrameworkOptions executionOptions)
+        protected override async void RunTestCases(IEnumerable<ObservationTestCase> testCases,
+                                                   IMessageSink executionMessageSink,
+                                                   ITestFrameworkExecutionOptions executionOptions)
         {
             var testAssembly = new TestAssembly(AssemblyInfo, AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
 
-            using (var assemblyRunner = new ObservationAssemblyRunner(testAssembly, testCases, messageSink, executionOptions))
+            using (var assemblyRunner = new ObservationAssemblyRunner(testAssembly, testCases, DiagnosticMessageSink, executionMessageSink, executionOptions))
                 await assemblyRunner.RunAsync();
         }
     }

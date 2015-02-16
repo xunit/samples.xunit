@@ -66,6 +66,7 @@
     <Compile Include="XunitExtensions\ObservationAttribute.cs" />
     <Compile Include="XunitExtensions\ObservationDiscoverer.cs" />
     <Compile Include="XunitExtensions\ObservationExecutor.cs" />
+    <Compile Include="XunitExtensions\ObservationTest.cs" />
     <Compile Include="XunitExtensions\ObservationTestCase.cs" />
     <Compile Include="XunitExtensions\ObservationTestCaseOrderer.cs" />
     <Compile Include="XunitExtensions\ObservationTestCaseRunner.cs" />

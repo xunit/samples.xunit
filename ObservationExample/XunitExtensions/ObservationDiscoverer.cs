@@ -9,16 +9,13 @@ namespace XunitExtensions
     {
         readonly CollectionPerClassTestCollectionFactory testCollectionFactory;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ObservationDiscoverer"/> class.
-        /// </summary>
-        /// <param name="assemblyInfo">The test assembly.</param>
-        /// <param name="sourceProvider">The source information provider.</param>
-        public ObservationDiscoverer(IAssemblyInfo assemblyInfo, ISourceInformationProvider sourceProvider)
-            : base(assemblyInfo, sourceProvider, null)
+        public ObservationDiscoverer(IAssemblyInfo assemblyInfo,
+                                     ISourceInformationProvider sourceProvider,
+                                     IMessageSink diagnosticMessageSink)
+            : base(assemblyInfo, sourceProvider, diagnosticMessageSink)
         {
             var testAssembly = new TestAssembly(assemblyInfo, AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
-            testCollectionFactory = new CollectionPerClassTestCollectionFactory(testAssembly);
+            testCollectionFactory = new CollectionPerClassTestCollectionFactory(testAssembly, diagnosticMessageSink);
         }
 
         protected override ITestClass CreateTestClass(ITypeInfo @class)
@@ -26,27 +23,32 @@ namespace XunitExtensions
             return new TestClass(testCollectionFactory.Get(@class), @class);
         }
 
-        bool FindTestsForMethod(ITestMethod testMethod, bool includeSourceInformation, IMessageBus messageBus)
+        bool FindTestsForMethod(ITestMethod testMethod,
+                                TestMethodDisplay defaultMethodDisplay,
+                                bool includeSourceInformation,
+                                IMessageBus messageBus)
         {
             var observationAttribute = testMethod.Method.GetCustomAttributes(typeof(ObservationAttribute)).FirstOrDefault();
             if (observationAttribute == null)
                 return true;
 
-            var testCase = new ObservationTestCase(testMethod);
+            var testCase = new ObservationTestCase(defaultMethodDisplay, testMethod);
             if (!ReportDiscoveredTestCase(testCase, includeSourceInformation, messageBus))
                 return false;
 
             return true;
         }
 
-        protected override bool FindTestsForType(ITestClass testClass, bool includeSourceInformation, IMessageBus messageBus)
+        protected override bool FindTestsForType(ITestClass testClass,
+                                                 bool includeSourceInformation,
+                                                 IMessageBus messageBus,
+                                                 ITestFrameworkDiscoveryOptions discoveryOptions)
         {
+            var methodDisplay = discoveryOptions.MethodDisplayOrDefault();
+
             foreach (var method in testClass.Class.GetMethods(includePrivateMethods: true))
-            {
-                var testMethod = new TestMethod(testClass, method);
-                if (!FindTestsForMethod(testMethod, includeSourceInformation, messageBus))
+                if (!FindTestsForMethod(new TestMethod(testClass, method), methodDisplay, includeSourceInformation, messageBus))
                     return false;
-            }
 
             return true;
         }
