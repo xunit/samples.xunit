@@ -34,7 +34,7 @@ namespace XunitExtensions
                                                                    IEnumerable<ObservationTestCase> testCases,
                                                                    CancellationTokenSource cancellationTokenSource)
         {
-            return new ObservationTestCollectionRunner(testCollection, testCases, messageBus, TestCaseOrderer, new ExceptionAggregator(Aggregator), cancellationTokenSource).RunAsync();
+            return new ObservationTestCollectionRunner(testCollection, testCases, DiagnosticMessageSink, messageBus, TestCaseOrderer, new ExceptionAggregator(Aggregator), cancellationTokenSource).RunAsync();
         }
     }
 }

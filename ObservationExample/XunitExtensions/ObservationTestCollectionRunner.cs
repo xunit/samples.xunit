@@ -11,13 +11,19 @@ namespace XunitExtensions
     {
         readonly static RunSummary FailedSummary = new RunSummary { Total = 1, Failed = 1 };
 
+        readonly IMessageSink diagnosticMessageSink;
+
         public ObservationTestCollectionRunner(ITestCollection testCollection,
                                                IEnumerable<ObservationTestCase> testCases,
+                                               IMessageSink diagnosticMessageSink,
                                                IMessageBus messageBus,
                                                ITestCaseOrderer testCaseOrderer,
                                                ExceptionAggregator aggregator,
                                                CancellationTokenSource cancellationTokenSource)
-            : base(testCollection, testCases, messageBus, testCaseOrderer, aggregator, cancellationTokenSource) { }
+            : base(testCollection, testCases, messageBus, testCaseOrderer, aggregator, cancellationTokenSource)
+        {
+            this.diagnosticMessageSink = diagnosticMessageSink;
+        }
 
         protected override async Task<RunSummary> RunTestClassAsync(ITestClass testClass,
                                                                     IReflectionTypeInfo @class,
@@ -35,7 +41,7 @@ namespace XunitExtensions
             if (Aggregator.HasExceptions)
                 return FailedSummary;
 
-            var result = await new ObservationTestClassRunner(specification, testClass, @class, testCases, MessageBus, TestCaseOrderer, new ExceptionAggregator(Aggregator), CancellationTokenSource).RunAsync();
+            var result = await new ObservationTestClassRunner(specification, testClass, @class, testCases, diagnosticMessageSink, MessageBus, TestCaseOrderer, new ExceptionAggregator(Aggregator), CancellationTokenSource).RunAsync();
 
             Aggregator.Run(specification.OnFinish);
 

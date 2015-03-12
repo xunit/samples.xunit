@@ -14,11 +14,12 @@ namespace XunitExtensions
                                           ITestClass testClass,
                                           IReflectionTypeInfo @class,
                                           IEnumerable<ObservationTestCase> testCases,
+                                          IMessageSink diagnosticMessageSink,
                                           IMessageBus messageBus,
                                           ITestCaseOrderer testCaseOrderer,
                                           ExceptionAggregator aggregator,
                                           CancellationTokenSource cancellationTokenSource)
-            : base(testClass, @class, testCases, messageBus, testCaseOrderer, aggregator, cancellationTokenSource)
+            : base(testClass, @class, testCases, diagnosticMessageSink, messageBus, testCaseOrderer, aggregator, cancellationTokenSource)
         {
             this.specification = specification;
         }
