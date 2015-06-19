@@ -4,13 +4,16 @@ using System.Linq;
 using Xunit.Abstractions;
 using Xunit.Sdk;
 
-public class AlphabeticalOrderer : ITestCaseOrderer 
+namespace TestOrderExamples.TestCaseOrdering
 {
-    public IEnumerable<TTestCase> OrderTestCases<TTestCase>(IEnumerable<TTestCase> testCases)
-            where TTestCase : ITestCase
+    public class AlphabeticalOrderer : ITestCaseOrderer
     {
-        var result = testCases.ToList();
-        result.Sort((x, y) => StringComparer.OrdinalIgnoreCase.Compare(x.TestMethod.Method.Name, y.TestMethod.Method.Name));
-        return result;
+        public IEnumerable<TTestCase> OrderTestCases<TTestCase>(IEnumerable<TTestCase> testCases)
+                where TTestCase : ITestCase
+        {
+            var result = testCases.ToList();
+            result.Sort((x, y) => StringComparer.OrdinalIgnoreCase.Compare(x.TestMethod.Method.Name, y.TestMethod.Method.Name));
+            return result;
+        }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using Xunit;
 
-[TestCaseOrderer("PriorityOrderer", "TestOrderExamples")]
-public class PriorityOrderExample
+[TestCaseOrderer("TestOrderExamples.TestCaseOrdering.PriorityOrderer", "TestOrderExamples")]
+public class PriorityOrderExamples
 {
     public static bool Test1Called;
     public static bool Test2ACalled;

@@ -1,6 +1,6 @@
 ﻿using Xunit;
 
-[TestCaseOrderer("AlphabeticalOrderer", "TestOrderExamples")]
+[TestCaseOrderer("TestOrderExamples.TestCaseOrdering.AlphabeticalOrderer", "TestOrderExamples")]
 public class AlphabeticalOrderExample
 {
     public static bool Test1Called;

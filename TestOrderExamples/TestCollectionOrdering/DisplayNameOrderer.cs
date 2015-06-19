@@ -3,10 +3,13 @@ using System.Linq;
 using Xunit;
 using Xunit.Abstractions;
 
-public class DisplayNameOrderer : ITestCollectionOrderer
+namespace TestOrderExamples.TestCollectionOrdering
 {
-    public IEnumerable<ITestCollection> OrderTestCollections(IEnumerable<ITestCollection> testCollections)
+    public class DisplayNameOrderer : ITestCollectionOrderer
     {
-        return testCollections.OrderBy(collection => collection.DisplayName);
+        public IEnumerable<ITestCollection> OrderTestCollections(IEnumerable<ITestCollection> testCollections)
+        {
+            return testCollections.OrderBy(collection => collection.DisplayName);
+        }
     }
 }

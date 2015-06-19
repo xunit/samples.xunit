@@ -1,7 +1,7 @@
 ﻿using Xunit;
 
 // Set the orderer
-[assembly: TestCollectionOrderer("DisplayNameOrderer", "TestOrderExamples")]
+[assembly: TestCollectionOrderer("TestOrderExamples.TestCollectionOrdering.DisplayNameOrderer", "TestOrderExamples")]
 
 // Need to turn off test parallelization so we can validate the run order
 [assembly: CollectionBehavior(DisableTestParallelization = true)]
