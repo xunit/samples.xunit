@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "STAExamples", "STAExamples\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestOutputExample", "TestOutputExample\TestOutputExample.csproj", "{57D342C0-2984-4303-B4F1-A055A5C029B9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PartialTrustExample", "PartialTrustExample\PartialTrustExample.csproj", "{19F535B4-8B47-4F45-A5BF-7DEAB9CBB06F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -93,6 +95,10 @@ Global
 		{57D342C0-2984-4303-B4F1-A055A5C029B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57D342C0-2984-4303-B4F1-A055A5C029B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57D342C0-2984-4303-B4F1-A055A5C029B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19F535B4-8B47-4F45-A5BF-7DEAB9CBB06F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19F535B4-8B47-4F45-A5BF-7DEAB9CBB06F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19F535B4-8B47-4F45-A5BF-7DEAB9CBB06F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19F535B4-8B47-4F45-A5BF-7DEAB9CBB06F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
