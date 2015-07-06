@@ -60,10 +60,13 @@
     <Compile Include="Samples.cs" />
     <Compile Include="SkippableFactAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SkippableTheoryAttribute.cs" />
     <Compile Include="XunitExtensions\SkippableFactDiscoverer.cs" />
     <Compile Include="XunitExtensions\SkippableFactMessageBus.cs" />
     <Compile Include="XunitExtensions\SkippableFactTestCase.cs" />
     <Compile Include="SkipTestException.cs" />
+    <Compile Include="XunitExtensions\SkippableTheoryDiscoverer.cs" />
+    <Compile Include="XunitExtensions\SkippableTheoryTestCase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
