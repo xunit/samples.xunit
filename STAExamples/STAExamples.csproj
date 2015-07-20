@@ -42,6 +42,7 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
     <Reference Include="xunit.abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
       <HintPath>..\packages\xunit.abstractions.2.0.0\lib\net35\xunit.abstractions.dll</HintPath>
     </Reference>
@@ -61,11 +62,11 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Samples.cs" />
-    <Compile Include="STAFactAttribute.cs" />
-    <Compile Include="STAFactDiscoverer.cs" />
-    <Compile Include="STATheoryAttribute.cs" />
-    <Compile Include="STATheoryDiscoverer.cs" />
-    <Compile Include="STATestCase.cs" />
+    <Compile Include="WpfFactAttribute.cs" />
+    <Compile Include="WpfFactDiscoverer.cs" />
+    <Compile Include="WpfTheoryAttribute.cs" />
+    <Compile Include="WpfTheoryDiscoverer.cs" />
+    <Compile Include="WpfTestCase.cs" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />

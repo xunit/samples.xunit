@@ -5,8 +5,6 @@ using Xunit.Sdk;
 namespace STAExamples
 {
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
-    [XunitTestCaseDiscoverer("STAExamples.STAFactDiscoverer", "STAExamples")]
-    public class STAFactAttribute : FactAttribute
-    {
-    }
+    [XunitTestCaseDiscoverer("STAExamples.WpfFactDiscoverer", "STAExamples")]
+    public class WpfFactAttribute : FactAttribute { }
 }

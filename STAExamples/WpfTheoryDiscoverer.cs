@@ -5,11 +5,11 @@ using Xunit.Sdk;
 
 namespace STAExamples
 {
-    public class STATheoryDiscoverer : IXunitTestCaseDiscoverer
+    public class WpfTheoryDiscoverer : IXunitTestCaseDiscoverer
     {
         readonly TheoryDiscoverer theoryDiscoverer;
 
-        public STATheoryDiscoverer(IMessageSink diagnosticMessageSink)
+        public WpfTheoryDiscoverer(IMessageSink diagnosticMessageSink)
         {
             theoryDiscoverer = new TheoryDiscoverer(diagnosticMessageSink);
         }
@@ -17,7 +17,7 @@ namespace STAExamples
         public IEnumerable<IXunitTestCase> Discover(ITestFrameworkDiscoveryOptions discoveryOptions, ITestMethod testMethod, IAttributeInfo factAttribute)
         {
             return theoryDiscoverer.Discover(discoveryOptions, testMethod, factAttribute)
-                                   .Select(testCase => new STATestCase(testCase));
+                                   .Select(testCase => new WpfTestCase(testCase));
         }
     }
 }

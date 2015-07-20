@@ -1,4 +1,5 @@
 ﻿using System.Threading;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace STAExamples
@@ -11,17 +12,21 @@ namespace STAExamples
             Assert.Equal(ApartmentState.MTA, Thread.CurrentThread.GetApartmentState());
         }
 
-        [STAFact]
-        public static void STAFact_OnSTAThread()
+        [WpfFact]
+        public static async void WpfFact_OnSTAThread()
         {
             Assert.Equal(ApartmentState.STA, Thread.CurrentThread.GetApartmentState());
+            await Task.Yield();
+            Assert.Equal(ApartmentState.STA, Thread.CurrentThread.GetApartmentState()); // still there
         }
 
-        [STATheory]
+        [WpfTheory]
         [InlineData(0)]
-        public static void STATheory_OnSTAThread(int unused)
+        public static async void WpfTheory_OnSTAThread(int unused)
         {
             Assert.Equal(ApartmentState.STA, Thread.CurrentThread.GetApartmentState());
+            await Task.Yield();
+            Assert.Equal(ApartmentState.STA, Thread.CurrentThread.GetApartmentState()); // still there
         }
     }
 }
