@@ -1,8 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 14.0.23107.0
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stack", "Stack\Stack.csproj", "{E435A244-244A-45C3-B190-A05128219E4A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssertExamples", "AssertExamples\AssertExamples.csproj", "{0435F191-D593-4DF3-8CED-A5721F0BB30D}"
@@ -34,6 +34,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PartialTrustExample", "PartialTrustExample\PartialTrustExample.csproj", "{19F535B4-8B47-4F45-A5BF-7DEAB9CBB06F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicSkipExample", "DynamicSkipExample\DynamicSkipExample.csproj", "{DC430BD1-F360-4866-8B5C-ADAB8B82CC81}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRollbackExample", "AutoRollbackExample\AutoRollbackExample.csproj", "{A1639870-F22A-4AF9-9ED4-921CBBA17CA9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -105,6 +107,10 @@ Global
 		{DC430BD1-F360-4866-8B5C-ADAB8B82CC81}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC430BD1-F360-4866-8B5C-ADAB8B82CC81}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC430BD1-F360-4866-8B5C-ADAB8B82CC81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1639870-F22A-4AF9-9ED4-921CBBA17CA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1639870-F22A-4AF9-9ED4-921CBBA17CA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1639870-F22A-4AF9-9ED4-921CBBA17CA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1639870-F22A-4AF9-9ED4-921CBBA17CA9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
