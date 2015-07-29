@@ -15,6 +15,12 @@ namespace AutoRollbackExample
         TransactionScope scope;
 
         /// <summary>
+        /// Gets or sets whether transaction flow across thread continuations is enabled for TransactionScope.
+        /// By default transaction flow across thread continuations is enabled.
+        /// </summary>
+        public TransactionScopeAsyncFlowOption AsyncFlowOption { get; set; } = TransactionScopeAsyncFlowOption.Enabled;
+
+        /// <summary>
         /// Gets or sets the isolation level of the transaction.
         /// Default value is <see cref="IsolationLevel"/>.Unspecified.
         /// </summary>
@@ -49,7 +55,7 @@ namespace AutoRollbackExample
             if (TimeoutInMS > 0)
                 options.Timeout = TimeSpan.FromMilliseconds(TimeoutInMS);
 
-            scope = new TransactionScope(ScopeOption, options);
+            scope = new TransactionScope(ScopeOption, options, AsyncFlowOption);
         }
     }
 }
