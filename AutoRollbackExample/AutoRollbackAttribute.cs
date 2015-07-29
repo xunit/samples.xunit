@@ -33,6 +33,12 @@ namespace AutoRollbackExample
         public long TimeoutInMS { get; set; } = -1;
 
         /// <summary>
+        /// Gets or sets whether transaction flow across thread continuations is enabled for TransactionScope.
+        /// By default transaction flow across thread continuations is enabled.
+        /// </summary>
+        public TransactionScopeAsyncFlowOption AsyncFlowOption = TransactionScopeAsyncFlowOption.Enabled;
+
+        /// <summary>
         /// Rolls back the transaction.
         /// </summary>
         public override void After(MethodInfo methodUnderTest)
@@ -49,7 +55,7 @@ namespace AutoRollbackExample
             if (TimeoutInMS > 0)
                 options.Timeout = TimeSpan.FromMilliseconds(TimeoutInMS);
 
-            scope = new TransactionScope(ScopeOption, options);
+            scope = new TransactionScope(ScopeOption, options, AsyncFlowOption);
         }
     }
 }
