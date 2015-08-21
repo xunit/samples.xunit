@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading;
-using Xunit;
+using Xunit.Runners;
 
 namespace TestRunner
 {
@@ -45,38 +44,29 @@ namespace TestRunner
             }
         }
 
-        static void OnDiscoveryComplete(int testCasesDiscovered, int testCasesToRun)
+        static void OnDiscoveryComplete(DiscoveryCompleteInfo info)
         {
             lock (consoleLock)
-                Console.WriteLine($"Running {testCasesToRun} of {testCasesDiscovered} tests...");
+                Console.WriteLine($"Running {info.TestCasesToRun} of {info.TestCasesDiscovered} tests...");
         }
 
-        static void OnExecutionComplete(int totalTests, int testsFailed, int testsSkipped, decimal executionTime)
+        static void OnExecutionComplete(ExecutionCompleteInfo info)
         {
             lock (consoleLock)
-                Console.WriteLine($"Finished: {totalTests} tests in {Math.Round(executionTime, 3)}s ({testsFailed} failed, {testsSkipped} skipped)");
+                Console.WriteLine($"Finished: {info.TotalTests} tests in {Math.Round(info.ExecutionTime, 3)}s ({info.TestsFailed} failed, {info.TestsSkipped} skipped)");
 
             finished.Set();
         }
 
-        static void OnTestFailed(string typeName,
-                                 string methodName,
-                                 Dictionary<string, List<string>> traits,
-                                 string testDisplayName,
-                                 string testCollectionDisplayName,
-                                 decimal executionTime,
-                                 string output,
-                                 string exceptionType,
-                                 string message,
-                                 string stackTrace)
+        static void OnTestFailed(TestFailedInfo info)
         {
             lock (consoleLock)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
 
-                Console.WriteLine("[FAIL] {0}: {1}", testDisplayName, message);
-                if (stackTrace != null)
-                    Console.WriteLine(stackTrace);
+                Console.WriteLine("[FAIL] {0}: {1}", info.TestDisplayName, info.ExceptionMessage);
+                if (info.ExceptionStackTrace != null)
+                    Console.WriteLine(info.ExceptionStackTrace);
 
                 Console.ResetColor();
             }
@@ -84,17 +74,12 @@ namespace TestRunner
             result = 1;
         }
 
-        static void OnTestSkipped(string typeName,
-                                  string methodName,
-                                  Dictionary<string, List<string>> traits,
-                                  string testDisplayName,
-                                  string testCollectionDisplayName,
-                                  string skipReason)
+        static void OnTestSkipped(TestSkippedInfo info)
         {
             lock (consoleLock)
             {
                 Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("[SKIP] {0}: {1}", testDisplayName, skipReason);
+                Console.WriteLine("[SKIP] {0}: {1}", info.TestDisplayName, info.SkipReason);
                 Console.ResetColor();
             }
         }
