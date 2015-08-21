@@ -63,7 +63,7 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="UnitTestData.xls">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>

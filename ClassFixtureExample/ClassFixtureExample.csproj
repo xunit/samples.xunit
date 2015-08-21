@@ -88,10 +88,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="DatabaseFixture.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="DatabaseFixture_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <DependentUpon>DatabaseFixture.mdf</DependentUpon>
     </Content>
   </ItemGroup>
