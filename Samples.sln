@@ -41,6 +41,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssemblyFixtureExample", "A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestRunner", "TestRunner\TestRunner.csproj", "{8B1EE0A8-E68C-45C3-AD87-8DCA1364453B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheoryDataExamples", "TheoryDataExamples\TheoryDataExamples.csproj", "{3F8F6471-FC04-4A45-B14A-3D23604D2C21}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -123,6 +125,10 @@ Global
 		{8B1EE0A8-E68C-45C3-AD87-8DCA1364453B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B1EE0A8-E68C-45C3-AD87-8DCA1364453B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B1EE0A8-E68C-45C3-AD87-8DCA1364453B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F8F6471-FC04-4A45-B14A-3D23604D2C21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F8F6471-FC04-4A45-B14A-3D23604D2C21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F8F6471-FC04-4A45-B14A-3D23604D2C21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F8F6471-FC04-4A45-B14A-3D23604D2C21}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
