@@ -23,7 +23,7 @@ Test*.xml
 Index.dat
 Storage.dat
 
-.vs/*
+.vs/
 
 project.lock.json
 *.nuget.props
