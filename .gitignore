@@ -22,3 +22,9 @@ Test*.xml
 
 Index.dat
 Storage.dat
+
+.vs/*
+
+project.lock.json
+*.nuget.props
+*.nuget.targets
