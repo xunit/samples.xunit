@@ -6,6 +6,9 @@ namespace DynamicSkipExample
     {
         public class Facts
         {
+            [Fact]
+            public void NonSkippableFact() { }
+
             [SkippableFact]
             public void Passing() { }
 

@@ -1,1 +1,5 @@
-﻿{ "appDomain": "denied" }
+﻿{
+    "appDomain": "denied",
+    "diagnosticMessages": true,
+    "methodDisplay": "method"
+}
