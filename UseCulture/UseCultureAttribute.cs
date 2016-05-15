@@ -68,6 +68,9 @@ public class UseCultureAttribute : BeforeAfterTestAttribute
 
         Thread.CurrentThread.CurrentCulture = Culture;
         Thread.CurrentThread.CurrentUICulture = UICulture;
+
+        CultureInfo.CurrentCulture.ClearCachedData();
+        CultureInfo.CurrentUICulture.ClearCachedData();
     }
 
     /// <summary>
@@ -79,5 +82,8 @@ public class UseCultureAttribute : BeforeAfterTestAttribute
     {
         Thread.CurrentThread.CurrentCulture = originalCulture;
         Thread.CurrentThread.CurrentUICulture = originalUICulture;
+
+        CultureInfo.CurrentCulture.ClearCachedData();
+        CultureInfo.CurrentUICulture.ClearCachedData();
     }
 }
