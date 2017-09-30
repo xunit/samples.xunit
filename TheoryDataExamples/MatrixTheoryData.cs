@@ -20,7 +20,7 @@ namespace TheoryDataExamples
 
     public class SampleUsage
     {
-        public static int[] Numbers = { 42, 2112, 2600 };
+        public static int[] Numbers = { 42, 5, 6 };
         public static string[] Strings = { "Hello", "world!" };
         public static MatrixTheoryData<string, int> MatrixData = new MatrixTheoryData<string, int>(Strings, Numbers);
 
