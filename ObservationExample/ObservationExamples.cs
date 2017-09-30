@@ -191,3 +191,31 @@ public class When_you_push_several_items_onto_the_stack : Specification
         Assert.Equal(firstElement, stack.Pop());
     }
 }
+
+public class When_you_throw_an_exception_during_class_construction : Specification
+{
+    public When_you_throw_an_exception_during_class_construction()
+    {
+        throw new Exception();
+    }
+
+    [Observation]
+    public void should_fail()
+    {
+        // This test should display as having failed, even without any assertions being called
+    }
+}
+
+public class When_you_throw_an_exception_during_because_call : Specification
+{
+    protected override void Because()
+    {
+        throw new Exception();
+    }
+
+    [Observation]
+    public void should_fail()
+    {
+        // This test should display as having failed, even without any assertions being called
+    }
+}

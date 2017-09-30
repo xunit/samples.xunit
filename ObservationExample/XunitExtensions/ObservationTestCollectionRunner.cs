@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit.Abstractions;
@@ -9,8 +10,6 @@ namespace XunitExtensions
 {
     public class ObservationTestCollectionRunner : TestCollectionRunner<ObservationTestCase>
     {
-        readonly static RunSummary FailedSummary = new RunSummary { Total = 1, Failed = 1 };
-
         readonly IMessageSink diagnosticMessageSink;
 
         public ObservationTestCollectionRunner(ITestCollection testCollection,
@@ -30,16 +29,23 @@ namespace XunitExtensions
                                                                     IEnumerable<ObservationTestCase> testCases)
         {
             var timer = new ExecutionTimer();
-            var specification = Activator.CreateInstance(testClass.Class.ToRuntimeType()) as Specification;
+            object testClassInstance = null;
+
+            Aggregator.Run(() => testClassInstance = Activator.CreateInstance(testClass.Class.ToRuntimeType()));
+
+            if (Aggregator.HasExceptions)
+                return FailEntireClass(testCases, timer);
+
+            var specification = testClassInstance as Specification;
             if (specification == null)
             {
                 Aggregator.Add(new InvalidOperationException(String.Format("Test class {0} cannot be static, and must derive from Specification.", testClass.Class.Name)));
-                return FailedSummary;
+                return FailEntireClass(testCases, timer);
             }
 
             Aggregator.Run(specification.OnStart);
             if (Aggregator.HasExceptions)
-                return FailedSummary;
+                return FailEntireClass(testCases, timer);
 
             var result = await new ObservationTestClassRunner(specification, testClass, @class, testCases, diagnosticMessageSink, MessageBus, TestCaseOrderer, new ExceptionAggregator(Aggregator), CancellationTokenSource).RunAsync();
 
@@ -50,6 +56,17 @@ namespace XunitExtensions
                 timer.Aggregate(disposable.Dispose);
 
             return result;
+        }
+
+        private RunSummary FailEntireClass(IEnumerable<ObservationTestCase> testCases, ExecutionTimer timer)
+        {
+            foreach (var testCase in testCases)
+            {
+                MessageBus.QueueMessage(new TestFailed(new ObservationTest(testCase, testCase.DisplayName), timer.Total,
+                    "Exception was thrown in class constructor", Aggregator.ToException()));
+            }
+            int count = testCases.Count();
+            return new RunSummary { Failed = count, Total = count };
         }
     }
 }
