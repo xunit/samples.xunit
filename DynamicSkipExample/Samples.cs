@@ -33,7 +33,11 @@ namespace DynamicSkipExample
         public class Theories
         {
             [SkippableTheory(Skip = "I never feel like it")]
+#pragma warning disable xUnit1003 // Since this theory is skipped, it doesn't need data
+#pragma warning disable xUnit1006 // Since this theory is skipped, it doesn't need parameters
             public void StaticallySkipped() { }
+#pragma warning restore xUnit1006
+#pragma warning restore xUnit1003
 
             [SkippableTheory]
             [InlineData(null)]

@@ -25,7 +25,7 @@ namespace TheoryDataExamples
         public static MatrixTheoryData<string, int> MatrixData = new MatrixTheoryData<string, int>(Strings, Numbers);
 
         [Theory]
-        [MemberData("MatrixData")]
+        [MemberData(nameof(MatrixData))]
         public void MyTestMethod(string x, int y)
         {
             Assert.Equal(y, x.Length);
