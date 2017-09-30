@@ -7,6 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="ClassFixture.mdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ClassFixture_log.ldf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <DependentUpon>ClassFixture.mdf</DependentUpon>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="xunit" Version="2.3.0-rc1-build3797" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.0-rc1-build3797" />
   </ItemGroup>
