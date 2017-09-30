@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Linq;
 using System.Threading;
 using Xunit;
@@ -109,5 +110,26 @@ public class UseCultureAttributeTests
     public void AttributeChangesUICultureToChileanSpanishInTestMethod()
     {
         Assert.Equal("es-CL", Thread.CurrentThread.CurrentUICulture.Name);
+    }
+
+    [Theory]
+    [InlineData("it-IT")]
+    [InlineData("ja-JP")]
+    [InlineData("nb-NO")]
+    public void RefreshCachedCultureRelatedInformationWithinTest(string culture)
+    {
+        var originalCulture = Thread.CurrentThread.CurrentCulture;
+        var attr = new UseCultureAttribute(culture);
+
+        attr.Before(null);
+
+        var ri = new RegionInfo(Thread.CurrentThread.CurrentCulture.LCID);
+
+        Assert.Equal(attr.Culture, Thread.CurrentThread.CurrentCulture);
+        Assert.Equal(ri.TwoLetterISORegionName, RegionInfo.CurrentRegion.TwoLetterISORegionName);
+
+        attr.After(null);
+
+        Assert.Equal(originalCulture, Thread.CurrentThread.CurrentCulture);
     }
 }
