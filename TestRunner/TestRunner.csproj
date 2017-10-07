@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="xunit.runner.utility" Version="2.3.0-rc1-build3797" />
+    <PackageReference Include="xunit.runner.utility" Version="2.3.0" />
   </ItemGroup>
 
   <ItemGroup>
