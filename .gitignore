@@ -28,3 +28,6 @@ Storage.dat
 project.lock.json
 *.nuget.props
 *.nuget.targets
+
+# JetBrains Rider
+.idea
