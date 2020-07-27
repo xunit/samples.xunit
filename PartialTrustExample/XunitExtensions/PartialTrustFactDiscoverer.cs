@@ -15,7 +15,7 @@ namespace PartialTrustExample.XunitExtensions
 
         public IEnumerable<IXunitTestCase> Discover(ITestFrameworkDiscoveryOptions discoveryOptions, ITestMethod testMethod, IAttributeInfo factAttribute)
         {
-            yield return new PartialTrustTestCase(diagnosticMessageSink, discoveryOptions.MethodDisplayOrDefault(), testMethod);
+            yield return new PartialTrustTestCase(diagnosticMessageSink, discoveryOptions.MethodDisplayOrDefault(), discoveryOptions.MethodDisplayOptionsOrDefault(), testMethod);
         }
     }
 }

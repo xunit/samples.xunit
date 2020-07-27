@@ -30,5 +30,5 @@ public class AssumeIdentityAttributeTests
     }
 
     [PrincipalPermission(SecurityAction.Demand, Role = "007")]
-    public static void DefeatVillian() { }
+    static void DefeatVillian() { }
 }

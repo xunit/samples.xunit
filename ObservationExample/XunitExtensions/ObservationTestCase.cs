@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit.Abstractions;
@@ -8,11 +9,12 @@ namespace XunitExtensions
 {
     public class ObservationTestCase : TestMethodTestCase
     {
-        [Obsolete("For de-serialization purposes only", error: true)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [Obsolete("Called by the de-serializer; should only be called by deriving classes for de-serialization purposes")]
         public ObservationTestCase() { }
 
-        public ObservationTestCase(TestMethodDisplay defaultMethodDisplay, ITestMethod testMethod)
-            : base(defaultMethodDisplay, testMethod) { }
+        public ObservationTestCase(TestMethodDisplay defaultMethodDisplay, TestMethodDisplayOptions defaultMethodDisplayOptions, ITestMethod testMethod)
+            : base(defaultMethodDisplay, defaultMethodDisplayOptions, testMethod) { }
 
         protected override void Initialize()
         {

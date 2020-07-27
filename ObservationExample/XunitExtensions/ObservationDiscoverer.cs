@@ -25,6 +25,7 @@ namespace XunitExtensions
 
         bool FindTestsForMethod(ITestMethod testMethod,
                                 TestMethodDisplay defaultMethodDisplay,
+                                TestMethodDisplayOptions defaultMethodDisplayOptions,
                                 bool includeSourceInformation,
                                 IMessageBus messageBus)
         {
@@ -32,7 +33,7 @@ namespace XunitExtensions
             if (observationAttribute == null)
                 return true;
 
-            var testCase = new ObservationTestCase(defaultMethodDisplay, testMethod);
+            var testCase = new ObservationTestCase(defaultMethodDisplay, defaultMethodDisplayOptions, testMethod);
             if (!ReportDiscoveredTestCase(testCase, includeSourceInformation, messageBus))
                 return false;
 
@@ -45,9 +46,10 @@ namespace XunitExtensions
                                                  ITestFrameworkDiscoveryOptions discoveryOptions)
         {
             var methodDisplay = discoveryOptions.MethodDisplayOrDefault();
+            var methodDisplayOptions = discoveryOptions.MethodDisplayOptionsOrDefault();
 
             foreach (var method in testClass.Class.GetMethods(includePrivateMethods: true))
-                if (!FindTestsForMethod(new TestMethod(testClass, method), methodDisplay, includeSourceInformation, messageBus))
+                if (!FindTestsForMethod(new TestMethod(testClass, method), methodDisplay, methodDisplayOptions, includeSourceInformation, messageBus))
                     return false;
 
             return true;

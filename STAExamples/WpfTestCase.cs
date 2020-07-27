@@ -26,7 +26,7 @@ namespace STAExamples
 
         /// <summary/>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        [Obsolete("Called by the de-serializer", error: true)]
+        [Obsolete("Called by the de-serializer; should only be called by deriving classes for de-serialization purposes")]
         public WpfTestCase() { }
 
         public IMethodInfo Method
@@ -117,6 +117,10 @@ namespace STAExamples
         {
             get { return testCase.UniqueID; }
         }
+
+        public Exception InitializationException { get; set; }
+
+        public int Timeout { get; set; }
 
         public void Deserialize(IXunitSerializationInfo info)
         {

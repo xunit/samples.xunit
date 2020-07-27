@@ -13,11 +13,11 @@ namespace RetryFactExample
         private int maxRetries;
 
         [EditorBrowsable(EditorBrowsableState.Never)]
-        [Obsolete("Called by the de-serializer", true)]
+        [Obsolete("Called by the de-serializer; should only be called by deriving classes for de-serialization purposes")]
         public RetryTestCase() { }
 
-        public RetryTestCase(IMessageSink diagnosticMessageSink, TestMethodDisplay testMethodDisplay, ITestMethod testMethod, int maxRetries)
-            : base(diagnosticMessageSink, testMethodDisplay, testMethod, testMethodArguments: null)
+        public RetryTestCase(IMessageSink diagnosticMessageSink, TestMethodDisplay testMethodDisplay, TestMethodDisplayOptions defaultMethodDisplayOptions, ITestMethod testMethod, int maxRetries)
+            : base(diagnosticMessageSink, testMethodDisplay, defaultMethodDisplayOptions, testMethod, testMethodArguments: null)
         {
             this.maxRetries = maxRetries;
         }

@@ -1,4 +1,6 @@
-﻿using System.Threading;
+﻿using System;
+using System.ComponentModel;
+using System.Threading;
 using System.Threading.Tasks;
 using Xunit.Abstractions;
 using Xunit.Sdk;
@@ -7,8 +9,12 @@ namespace PartialTrustExample.XunitExtensions
 {
     public class PartialTrustTestCase : XunitTestCase
     {
-        public PartialTrustTestCase(IMessageSink diagnosticMessageSink, TestMethodDisplay defaultMethodDisplay, ITestMethod testMethod)
-            : base(diagnosticMessageSink, defaultMethodDisplay, testMethod) { }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [Obsolete("Called by the de-serializer; should only be called by deriving classes for de-serialization purposes")]
+        public PartialTrustTestCase() { }
+
+        public PartialTrustTestCase(IMessageSink diagnosticMessageSink, TestMethodDisplay defaultMethodDisplay, TestMethodDisplayOptions defaultMethodDisplayOptions, ITestMethod testMethod)
+            : base(diagnosticMessageSink, defaultMethodDisplay, defaultMethodDisplayOptions, testMethod) { }
 
         public override Task<RunSummary> RunAsync(IMessageSink diagnosticMessageSink,
                                                   IMessageBus messageBus,
