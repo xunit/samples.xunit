@@ -1,0 +1,10 @@
+<Project>
+
+  <PropertyGroup>
+    <MicrosoftNetTestSdkVersion>17.6.2</MicrosoftNetTestSdkVersion>
+    <XunitAnalyzersVersion>1.2.0-pre.27</XunitAnalyzersVersion>
+    <XunitV2Version>2.5.0-pre.37</XunitV2Version>
+    <XunitRunnerVSVersion>2.5.0-pre.22</XunitRunnerVSVersion>
+  </PropertyGroup>
+
+</Project>

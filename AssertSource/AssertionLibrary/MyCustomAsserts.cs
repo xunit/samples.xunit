@@ -16,7 +16,7 @@ partial class Assert
     public static void IsEven(int value)
     {
         if (value % 2 != 0)
-            throw new IsEvenException(value);
+            throw IsEvenException.ForNonEvenValue(value);
     }
 
     /// <summary>

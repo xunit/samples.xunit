@@ -6,6 +6,10 @@
 
 public class IsEvenException : XunitException
 {
-    public IsEvenException(int value) : base($"The value {value} was not even.")
+    IsEvenException(string message)
+        : base(message)
     { }
+
+    public static IsEvenException ForNonEvenValue(int value) =>
+        new($"The value {value} was not even.");
 }

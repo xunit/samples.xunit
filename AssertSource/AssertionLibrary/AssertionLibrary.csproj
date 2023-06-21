@@ -5,13 +5,13 @@
     As noted in https://github.com/xunit/assert.xunit#annotations we enable all the supported flags for the newest
     assertion library features that are supported for v2.
     -->
-    <DefineConstants>$(DefineConstants);XUNIT_NULLABLE;XUNIT_SPAN;XUNIT_VALUETASK</DefineConstants>
+    <DefineConstants>$(DefineConstants);XUNIT_IMMUTABLE_COLLECTIONS;XUNIT_NULLABLE;XUNIT_SPAN;XUNIT_VALUETASK</DefineConstants>
     <Nullable>enable</Nullable>
     <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="xunit.assert.source" Version="2.4.2" />
+    <PackageReference Include="xunit.assert.source" Version="$(XunitV2Version)" />
   </ItemGroup>
 
 </Project>
