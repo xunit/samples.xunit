@@ -33,7 +33,9 @@ namespace XunitExtensions
             if (observationAttribute == null)
                 return true;
 
-            var testCase = new ObservationTestCase(defaultMethodDisplay, defaultMethodDisplayOptions, testMethod);
+            var order = observationAttribute.GetNamedArgument<int>("Order");
+
+            var testCase = new ObservationTestCase(defaultMethodDisplay, defaultMethodDisplayOptions, testMethod, order);
             if (!ReportDiscoveredTestCase(testCase, includeSourceInformation, messageBus))
                 return false;
 

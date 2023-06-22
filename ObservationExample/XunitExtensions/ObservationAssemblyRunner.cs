@@ -26,7 +26,7 @@ namespace XunitExtensions
 
         protected override string GetTestFrameworkEnvironment()
         {
-            return String.Format("{0}-bit .NET {1}", IntPtr.Size * 8, Environment.Version);
+            return string.Format("{0}-bit .NET {1}", IntPtr.Size * 8, Environment.Version);
         }
 
         protected override Task<RunSummary> RunTestCollectionAsync(IMessageBus messageBus,

@@ -1,4 +1,3 @@
-using System.Threading;
 using Xunit;
 
 public class Example
@@ -6,6 +5,6 @@ public class Example
     [Fact, Category("Trait")]
     public void ExampleFact()
     {
-        Assert.True(true); 
+        Assert.True(true);
     }
 }

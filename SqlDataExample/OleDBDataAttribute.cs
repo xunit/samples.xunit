@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Data;
 using System.Data.OleDb;
-using System.Diagnostics.CodeAnalysis;
-
 
 /// <summary>
 /// Provides a data source for a data theory, with the data coming from an OLEDB connection.
 /// </summary>
 [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
-[SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "Db", Justification = "That is the correct casing.")]
-[SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes", Justification = "This attribute is designed as an extensibility point.")]
 public class OleDbDataAttribute : DataAdapterDataAttribute
 {
     readonly string connectionString;
@@ -43,8 +39,6 @@ public class OleDbDataAttribute : DataAdapterDataAttribute
     }
 
     /// <inheritdoc/>
-    [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "Consumers of this property result already dispose of the result when they're finished with it.")]
-    [SuppressMessage("Microsoft.Security", "CA2100:Review SQL queries for security vulnerabilities", Justification = "This query comes from the developer, not the end user.")]
     protected override IDataAdapter DataAdapter
     {
         get { return new OleDbDataAdapter(selectStatement, connectionString); }

@@ -10,6 +10,3 @@ class CategoryAttribute : Attribute, ITraitAttribute
 {
     public CategoryAttribute(string category) { }
 }
-
-
-

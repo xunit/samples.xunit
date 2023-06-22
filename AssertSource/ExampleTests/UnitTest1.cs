@@ -42,6 +42,9 @@ public class UnitTest1
     {
         int[] values = new[] { 4, 5 };
 
-        await Assert.AllAsync(values, value => Assert.IsEvenAsync(value));
+        await Assert.AllAsync(
+            values,
+            value => Assert.IsEvenAsync(value)
+        );
     }
 }

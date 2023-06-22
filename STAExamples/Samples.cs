@@ -22,9 +22,7 @@ namespace STAExamples
 
         [WpfTheory]
         [InlineData(0)]
-#pragma warning disable xUnit1026
         public static async void WpfTheory_OnSTAThread(int _)
-#pragma warning restore xUnit1026
         {
             Assert.Equal(ApartmentState.STA, Thread.CurrentThread.GetApartmentState());
             await Task.Yield();

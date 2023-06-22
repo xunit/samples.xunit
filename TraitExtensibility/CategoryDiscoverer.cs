@@ -1,7 +1,7 @@
-﻿using System.Linq;
-using Xunit.Sdk;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Xunit.Abstractions;
-using System.Collections.Generic;
+using Xunit.Sdk;
 
 /// <summary>
 /// This class discovers all of the tests and test classes that have

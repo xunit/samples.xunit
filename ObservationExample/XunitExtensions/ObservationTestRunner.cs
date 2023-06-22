@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
@@ -12,7 +11,7 @@ namespace XunitExtensions
     {
         readonly Specification specification;
         readonly ExecutionTimer timer;
-        
+
         public ObservationTestRunner(Specification specification,
                                      ITest test,
                                      IMessageBus messageBus,

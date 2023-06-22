@@ -4,41 +4,32 @@ using System.Data.SqlClient;
 
 public class DatabaseFixture : IDisposable
 {
-    SqlConnection connection;
-    int fooUserID;
-
     public DatabaseFixture()
     {
         string connectionString = ConfigurationManager.ConnectionStrings["DatabaseFixture"].ConnectionString;
-        connection = new SqlConnection(connectionString);
-        connection.Open();
+        Connection = new SqlConnection(connectionString);
+        Connection.Open();
 
         string sql = @"INSERT INTO Users VALUES ('foo', 'bar'); SELECT SCOPE_IDENTITY();";
 
-        using (SqlCommand cmd = new SqlCommand(sql, connection))
-            fooUserID = Convert.ToInt32(cmd.ExecuteScalar());
+        using (SqlCommand cmd = new SqlCommand(sql, Connection))
+            FooUserID = Convert.ToInt32(cmd.ExecuteScalar());
     }
 
-    public SqlConnection Connection
-    {
-        get { return connection; }
-    }
+    public SqlConnection Connection { get; }
 
-    public int FooUserID
-    {
-        get { return fooUserID; }
-    }
+    public int FooUserID { get; }
 
     public void Dispose()
     {
         string sql = @"DELETE FROM Users WHERE ID = @id;";
 
-        using (SqlCommand cmd = new SqlCommand(sql, connection))
+        using (SqlCommand cmd = new SqlCommand(sql, Connection))
         {
-            cmd.Parameters.AddWithValue("@id", fooUserID);
+            cmd.Parameters.AddWithValue("@id", FooUserID);
             cmd.ExecuteNonQuery();
         }
 
-        connection.Close();
+        Connection.Close();
     }
 }

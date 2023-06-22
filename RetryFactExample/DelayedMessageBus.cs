@@ -20,6 +20,10 @@ namespace RetryFactExample
 
         public bool QueueMessage(IMessageSinkMessage message)
         {
+            // Technically speaking, this lock isn't necessary in our case, because we know we're using this
+            // message bus for a single test (so there's no possibility of parallelism). However, it's good
+            // practice when something might be used where parallel messages might arrive, so it's here in
+            // this sample.
             lock (messages)
                 messages.Add(message);
 

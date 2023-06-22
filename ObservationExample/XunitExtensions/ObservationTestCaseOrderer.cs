@@ -7,9 +7,10 @@ namespace XunitExtensions
 {
     public class ObservationTestCaseOrderer : ITestCaseOrderer
     {
-        public IEnumerable<TTestCase> OrderTestCases<TTestCase>(IEnumerable<TTestCase> testCases) where TTestCase : ITestCase
+        public IEnumerable<TTestCase> OrderTestCases<TTestCase>(IEnumerable<TTestCase> testCases)
+            where TTestCase : ITestCase
         {
-            return testCases;
+            return testCases.OrderBy(tc => tc is ObservationTestCase otc ? otc.Order : 0);
         }
     }
 }

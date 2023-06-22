@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
-
 
 /// <summary>
 /// Provides a data source for a data theory, with the data coming a Microsoft SQL Server.
 /// </summary>
 [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
-[SuppressMessage("Microsoft.Design", "CA1019:DefineAccessorsForAttributeArguments", Justification = "The values are available indirectly on the base class.")]
-[SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes", Justification = "This attribute is designed as an extensibility point.")]
 public class SqlServerDataAttribute : OleDbDataAttribute
 {
     const string sqlWithTrust =
@@ -27,7 +23,7 @@ public class SqlServerDataAttribute : OleDbDataAttribute
     public SqlServerDataAttribute(string serverName,
         string databaseName,
         string selectStatement)
-        : base(String.Format(CultureInfo.InvariantCulture, sqlWithTrust, serverName, databaseName), selectStatement)
+        : base(string.Format(CultureInfo.InvariantCulture, sqlWithTrust, serverName, databaseName), selectStatement)
     {
     }
 
@@ -44,7 +40,7 @@ public class SqlServerDataAttribute : OleDbDataAttribute
                                   string userName,
                                   string password,
                                   string selectStatement)
-        : base(String.Format(CultureInfo.InvariantCulture, sqlWithUser, serverName, databaseName, userName, password),
+        : base(string.Format(CultureInfo.InvariantCulture, sqlWithUser, serverName, databaseName, userName, password),
                selectStatement)
     { }
 }

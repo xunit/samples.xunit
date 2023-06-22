@@ -1,17 +1,14 @@
 using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Security.Principal;
 using System.Threading;
 using Xunit.Sdk;
 
-
 /// <summary>
-/// Apply this attribute to your test method to replace the 
-/// <see cref="Thread.CurrentPrincipal"/> with another role.
+/// Apply this attribute to your test method to replace the <see cref="Thread.CurrentPrincipal"/> with
+/// another role.
 /// </summary>
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
-[SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes", Justification = "This attribute is designed as an extensibility point.")]
 public class AssumeIdentityAttribute : BeforeAfterTestAttribute
 {
     IPrincipal originalPrincipal;
@@ -52,4 +49,3 @@ public class AssumeIdentityAttribute : BeforeAfterTestAttribute
         Thread.CurrentPrincipal = principal;
     }
 }
-
