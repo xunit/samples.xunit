@@ -1,4 +1,6 @@
-﻿using System;
+﻿#pragma warning disable xUnit1041  // This sample uses an alternate fixture source that xUnit1041 doesn't understand
+
+using System;
 using Xunit;
 
 // The custom test framework enables the support
