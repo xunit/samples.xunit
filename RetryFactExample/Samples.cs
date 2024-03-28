@@ -49,5 +49,28 @@ namespace RetryFactExample
                 Assert.Equal(2, counter.RunCount);
             }
         }
+
+        public class RetryTheorySample : IClassFixture<CounterFixture>
+        {
+            private readonly CounterFixture counter;
+
+            public RetryTheorySample(CounterFixture counter)
+            {
+                this.counter = counter;
+
+                counter.RunCount++;
+            }
+
+            [RetryTheory(MaxRetries = 2)]
+            [InlineData(2)]    // Will fail once then pass
+            [InlineData(100)]  // Will fail twice
+            public void TheoryMethod(int expectedCount)
+            {
+                // This test is a little sketchy, since we have a single shared counter for all
+                // data items, so we use >= rather than Equal, and assume the test method will run
+                // enough to make 2 pass but not enough to make 100 pass.
+                Assert.True(counter.RunCount >= expectedCount);
+            }
+        }
     }
 }

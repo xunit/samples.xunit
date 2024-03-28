@@ -16,8 +16,8 @@ namespace RetryFactExample
         [Obsolete("Called by the de-serializer; should only be called by deriving classes for de-serialization purposes")]
         public RetryTestCase() { }
 
-        public RetryTestCase(IMessageSink diagnosticMessageSink, TestMethodDisplay testMethodDisplay, TestMethodDisplayOptions defaultMethodDisplayOptions, ITestMethod testMethod, int maxRetries)
-            : base(diagnosticMessageSink, testMethodDisplay, defaultMethodDisplayOptions, testMethod, testMethodArguments: null)
+        public RetryTestCase(IMessageSink diagnosticMessageSink, TestMethodDisplay testMethodDisplay, TestMethodDisplayOptions defaultMethodDisplayOptions, ITestMethod testMethod, int maxRetries, object[] testMethodArguments = null)
+            : base(diagnosticMessageSink, testMethodDisplay, defaultMethodDisplayOptions, testMethod, testMethodArguments: testMethodArguments)
         {
             this.maxRetries = maxRetries;
         }
