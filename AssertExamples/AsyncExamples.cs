@@ -5,7 +5,7 @@ using Xunit;
 public class AsyncExamples
 {
     [Fact]
-    public async void CodeThrowsAsync()
+    public async Task CodeThrowsAsync()
     {
         Func<Task> testCode = () => Task.Factory.StartNew(ThrowingMethod);
 
@@ -15,7 +15,7 @@ public class AsyncExamples
     }
 
     [Fact]
-    public async void RecordAsync()
+    public async Task RecordAsync()
     {
         Func<Task> testCode = () => Task.Factory.StartNew(ThrowingMethod);
 

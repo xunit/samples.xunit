@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using Xunit.Runners;
 
@@ -18,14 +19,16 @@ namespace TestRunner
 
         static int Main(string[] args)
         {
-            if (args.Length == 0 || args.Length > 2)
+            if (args.Length == 0)
             {
-                Console.WriteLine("usage: TestRunner <assembly> [typeName]");
+                Console.WriteLine("usage: TestRunner <assembly> [typeName [typeName...]]");
                 return 2;
             }
 
             var testAssembly = args[0];
-            var typeName = args.Length == 2 ? args[1] : null;
+            var typeNames = new List<string>();
+            for (int idx = 1; idx < args.Length; ++idx)
+                typeNames.Add(args[idx]);
 
             using (var runner = AssemblyRunner.WithAppDomain(testAssembly))
             {
@@ -35,7 +38,9 @@ namespace TestRunner
                 runner.OnTestSkipped = OnTestSkipped;
 
                 Console.WriteLine("Discovering...");
-                runner.Start(typeName);
+
+                var options = new AssemblyRunnerStartOptions { TypesToRun = typeNames.ToArray() };
+                runner.Start(options);
 
                 finished.WaitOne();
                 finished.Dispose();
