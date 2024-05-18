@@ -67,6 +67,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExampleTests", "AssertSourc
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NamespaceParallelization", "NamespaceParallelization\NamespaceParallelization.csproj", "{1B07FBA3-56B5-4EB6-B496-51172C5A4FEA}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AsyncDataExample", "AsyncDataExample\AsyncDataExample.csproj", "{6936F62A-F539-4066-86E6-2984B27059E0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -165,6 +167,10 @@ Global
 		{1B07FBA3-56B5-4EB6-B496-51172C5A4FEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B07FBA3-56B5-4EB6-B496-51172C5A4FEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B07FBA3-56B5-4EB6-B496-51172C5A4FEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6936F62A-F539-4066-86E6-2984B27059E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6936F62A-F539-4066-86E6-2984B27059E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6936F62A-F539-4066-86E6-2984B27059E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6936F62A-F539-4066-86E6-2984B27059E0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -193,6 +199,7 @@ Global
 		{F0FD3250-8E35-4D28-9649-9AD08B7862AF} = {8FCEAD4B-9655-444B-98C6-906D36E2CF55}
 		{B075B95C-146A-4C81-AEBC-BE9DF65D451A} = {8FCEAD4B-9655-444B-98C6-906D36E2CF55}
 		{1B07FBA3-56B5-4EB6-B496-51172C5A4FEA} = {8F8C48F8-B161-4E6A-9234-FA6B61A994A5}
+		{6936F62A-F539-4066-86E6-2984B27059E0} = {CCC20C85-5F1E-481C-AB07-88970F161CC0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BB4E573C-955C-43EA-AE30-56B11C1C34D9}

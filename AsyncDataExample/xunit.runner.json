@@ -1,0 +1,4 @@
+{
+  "$schema": "https://xunit.net/schema/v2.8/xunit.runner.schema.json",
+  "diagnosticMessages": true
+}
