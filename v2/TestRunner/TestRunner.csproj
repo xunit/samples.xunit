@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <TargetFramework>net462</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="xunit.runner.utility" Version="$(XunitVersion)" />
+  </ItemGroup>
+
+</Project>

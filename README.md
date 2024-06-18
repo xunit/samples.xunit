@@ -1,6 +1,6 @@
 ## About This Project
 
-This project contains samples that show how to use and extend xUnit.net.
+This project contains samples that show how to use and extend xUnit.net. They are separated into folders with samples for v2 and v3.
 
 To open an issue for this project, please visit the [core xUnit.net project issue tracker](https://github.com/xunit/xunit/issues).
 
