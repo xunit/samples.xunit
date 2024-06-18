@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assertion Library as Source", "Assertion Library as Source", "{F51CFCFF-07E6-452B-B80E-D9ED6AB38F2B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cross-Cutting Concerns", "Cross-Cutting Concerns", "{B839926B-2C14-4EF0-A026-A2A8DBF0E649}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Custom Assertions", "Custom Assertions", "{9BE859FF-BE9B-41C2-A860-A9025801E64E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Fixture Examples", "Fixture Examples", "{592D764A-0E62-4513-9CD7-1141BE8074E1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Runners", "Runners", "{86385417-6B9B-49E7-A1E8-6080F922DB62}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sample Tests", "Sample Tests", "{05973133-A56A-4187-9BD8-F1708E28416B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test Framework Customization", "Test Framework Customization", "{BBB42E7D-9830-4B77-93D2-D73A1A07C587}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test Method Extensibility", "Test Method Extensibility", "{9DF8E9B3-DBFE-4E4C-81E8-4CBDE8ECD091}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Theory Data Extensibility", "Theory Data Extensibility", "{2A9E2C2D-6B11-464E-85E6-EA8815532830}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StackSample", "StackSample\StackSample.csproj", "{A2BB48F1-D61F-48E7-8CBD-E41CA826D6B2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A2BB48F1-D61F-48E7-8CBD-E41CA826D6B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2BB48F1-D61F-48E7-8CBD-E41CA826D6B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2BB48F1-D61F-48E7-8CBD-E41CA826D6B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2BB48F1-D61F-48E7-8CBD-E41CA826D6B2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A2BB48F1-D61F-48E7-8CBD-E41CA826D6B2} = {05973133-A56A-4187-9BD8-F1708E28416B}
+	EndGlobalSection
+EndGlobal

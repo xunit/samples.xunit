@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFrameworks>net472;net6.0</TargetFrameworks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(MicrosoftNetTestSdkVersion)" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="$(XunitRunnerVSVersion)" PrivateAssets="all" />
+    <PackageReference Include="xunit.v3" Version="$(XunitVersion)" />
+  </ItemGroup>
+
+</Project>
