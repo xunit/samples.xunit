@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!--
+    Since we've imported the assertions via source, and have nullable enabled, we need to let the
+    assertion library know that by defining XUNIT_NULLABLE.
+      For more information, see https://github.com/xunit/assert.xunit/#annotations
+    -->
+    <DefineConstants>$(DefineConstants);XUNIT_NULLABLE</DefineConstants>
+    <OutputType>Exe</OutputType>
+    <TargetFrameworks>net472;net8.0</TargetFrameworks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(Version_Microsoft_NET_Test_Sdk)" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="$(Version_xunit_runner_visualstudio)" PrivateAssets="all" />
+    <!--
+    We want to reference xunit.v3.assert.source (so that we can extend the Assert class itself),
+    which means we need to bring in references to the three individual packages instead of referencing
+    xunit.v3 directly.
+    -->
+    <PackageReference Include="xunit.analyzers" Version="$(Version_xunit_analyzers)" />
+    <PackageReference Include="xunit.v3.assert.source" Version="$(Version_xunit_v3)" />
+    <PackageReference Include="xunit.v3.core" Version="$(Version_xunit_v3)" />
+  </ItemGroup>
+
+  <!-- Need this to allow nullable support in the source-based assertion library to work with .NET Framework -->
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net472' ">
+    <PackageReference Include="TunnelVisionLabs.ReferenceAssemblyAnnotator" Version="1.0.0-alpha.160" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />
+    <PackageDownload Include="Microsoft.NETCore.App.Ref" Version="[8.0.11]" />
+  </ItemGroup>
+
+</Project>

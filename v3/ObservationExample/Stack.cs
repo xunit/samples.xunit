@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace StackSample;
+namespace ObservationExample;
+
+// This is a copy of the Stack class from StackSample
 
 public class Stack<T>
 {

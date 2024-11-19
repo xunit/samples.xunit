@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+  </PropertyGroup>
+
+  <!--
+  This is just an extensibilty library, so it takes a reference to the extensibility NuGet
+  package rather than `xunit` (which is what unit test authors take a reference to). You can
+  also target `netstandard2.0` since that allows a single library to support both .NET Framework
+  and .NET with a single binary.
+  -->
+  <ItemGroup>
+    <PackageReference Include="xunit.v3.extensibility.core" Version="$(Version_xunit_v3)" />
+  </ItemGroup>
+
+</Project>

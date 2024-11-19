@@ -1,7 +1,6 @@
 using System;
+using StackSample;
 using Xunit;
-
-namespace StackSample.Tests;
 
 // The tests in this file are structured using nested classes, in a "context" style. This means
 // that each nested class is a context, meaning: there is a shared setup that puts the tests
@@ -11,12 +10,14 @@ namespace StackSample.Tests;
 //
 //   Context: Empty Stack
 //     Verify that Count is 0
+//     Verify that IsEmpty is true
 //     Call Pop, Verify InvalidOperationException is thrown
 //     Call Peek, Verify InvalidOperationException is thrown
 //     Call Contains, Verify that it returns false
 //
 //   Context: Create a Stack, Push a single value
 //     Verify that Count is 1
+//     Verify that IsEmpty is false
 //     Call Pop, Verify Count is 0
 //     Call Peek, Verify Count is 1
 //     Call Pop, Verify Pop returns the pushed integer
@@ -34,7 +35,7 @@ public class StackTests
 {
     public class EmptyStack
     {
-        Stack<int> stack;
+        readonly Stack<int> stack;
 
         public EmptyStack() =>
             stack = new();
@@ -46,6 +47,10 @@ public class StackTests
 
             Assert.Equal(0, count);
         }
+
+        [Fact]
+        public void IsEmpty_ShouldReturnTrue() =>
+            Assert.True(stack.IsEmpty);
 
         [Fact]
         public void Contains_ShouldReturnFalse()
@@ -61,6 +66,7 @@ public class StackTests
             var exception = Record.Exception(() => stack.Pop());
 
             Assert.IsType<InvalidOperationException>(exception);
+            Assert.Equal("empty stack", exception.Message);
         }
 
         [Fact]
@@ -69,6 +75,7 @@ public class StackTests
             var exception = Record.Exception(() => stack.Peek());
 
             Assert.IsType<InvalidOperationException>(exception);
+            Assert.Equal("empty stack", exception.Message);
         }
     }
 
@@ -91,6 +98,10 @@ public class StackTests
 
             Assert.Equal(1, count);
         }
+
+        [Fact]
+        public void IsEmpty_ShouldReturnFalse() =>
+            Assert.False(stack.IsEmpty);
 
         [Fact]
         public void Pop_CountShouldBeZero()

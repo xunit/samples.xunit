@@ -1,0 +1,21 @@
+# top-most EditorConfig file
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+indent_style = space
+indent_size = 4
+
+[*.sln]
+end_of_line = crlf
+
+[*.{csproj,json,props,targets,xslt,yaml,yml}]
+indent_size = 2
+
+[*.cs]
+dotnet_diagnostic.CA1050.severity  = none  # Declare types in namespaces
+dotnet_diagnostic.IDE0022.severity = none  # Use block body for method
+dotnet_diagnostic.IDE0040.severity = none  # Add accessibility modifiers
+dotnet_diagnostic.IDE0130.severity = none  # Namespace does not match folder structure
