@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using Xunit.Sdk;
 using Xunit.v3;
@@ -17,9 +18,10 @@ public class ObservationTestAssemblyRunner :
         ObservationTestAssembly testAssembly,
         IReadOnlyCollection<ObservationTestCase> testCases,
         IMessageSink executionMessageSink,
-        ITestFrameworkExecutionOptions executionOptions)
+        ITestFrameworkExecutionOptions executionOptions,
+        CancellationToken cancellationToken)
     {
-        await using var ctxt = new ObservationTestAssemblyRunnerContext(testAssembly, testCases, executionMessageSink, executionOptions);
+        await using var ctxt = new ObservationTestAssemblyRunnerContext(testAssembly, testCases, executionMessageSink, executionOptions, cancellationToken);
         await ctxt.InitializeAsync();
 
         return await Run(ctxt);
@@ -42,6 +44,7 @@ public class ObservationTestAssemblyRunnerContext(
     ObservationTestAssembly testAssembly,
     IReadOnlyCollection<ObservationTestCase> testCases,
     IMessageSink executionMessageSink,
-    ITestFrameworkExecutionOptions executionOptions) :
-        TestAssemblyRunnerContext<ObservationTestAssembly, ObservationTestCase>(testAssembly, testCases, executionMessageSink, executionOptions)
+    ITestFrameworkExecutionOptions executionOptions,
+    CancellationToken cancellationToken) :
+        TestAssemblyRunnerContext<ObservationTestAssembly, ObservationTestCase>(testAssembly, testCases, executionMessageSink, executionOptions, cancellationToken)
 { }

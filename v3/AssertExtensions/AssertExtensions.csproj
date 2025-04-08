@@ -24,6 +24,11 @@
     <PackageReference Include="xunit.v3.core" Version="$(Version_xunit_v3)" />
   </ItemGroup>
 
+  <!-- Need these just for .NET Framework, as .NET already has these types -->
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net472' ">
+    <PackageReference Include="System.Memory" Version="4.6.3" />
+  </ItemGroup>
+
   <!-- Need this to allow nullable support in the source-based assertion library to work with .NET Framework -->
   <ItemGroup Condition=" '$(TargetFramework)' == 'net472' ">
     <PackageReference Include="TunnelVisionLabs.ReferenceAssemblyAnnotator" Version="1.0.0-alpha.160" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />

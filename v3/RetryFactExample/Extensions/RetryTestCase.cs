@@ -21,6 +21,7 @@ public class RetryTestCase : XunitTestCase, ISelfExecutingXunitTestCase
         string testCaseDisplayName,
         string uniqueID,
         bool @explicit,
+        Type[]? skipExceptions = null,
         string? skipReason = null,
         Type? skipType = null,
         string? skipUnless = null,
@@ -30,7 +31,7 @@ public class RetryTestCase : XunitTestCase, ISelfExecutingXunitTestCase
         string? sourceFilePath = null,
         int? sourceLineNumber = null,
         int? timeout = null) :
-            base(testMethod, testCaseDisplayName, uniqueID, @explicit, skipReason, skipType, skipUnless, skipWhen, traits, testMethodArguments, sourceFilePath, sourceLineNumber, timeout)
+            base(testMethod, testCaseDisplayName, uniqueID, @explicit, skipExceptions, skipReason, skipType, skipUnless, skipWhen, traits, testMethodArguments, sourceFilePath, sourceLineNumber, timeout)
     {
         MaxRetries = maxRetries;
     }

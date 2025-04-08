@@ -33,9 +33,10 @@ public class NamespaceParallelizationTestAssemblyRunner :
         IXunitTestAssembly testAssembly,
         IReadOnlyCollection<IXunitTestCase> testCases,
         IMessageSink executionMessageSink,
-        ITestFrameworkExecutionOptions executionOptions)
+        ITestFrameworkExecutionOptions executionOptions,
+        CancellationToken cancellationToken)
     {
-        await using var ctxt = new NamespaceParallelizationTestAssemblyRunnerContext(testAssembly, testCases, executionMessageSink, executionOptions);
+        await using var ctxt = new NamespaceParallelizationTestAssemblyRunnerContext(testAssembly, testCases, executionMessageSink, executionOptions, cancellationToken);
         await ctxt.InitializeAsync();
 
         return await Run(ctxt);
@@ -92,8 +93,9 @@ public class NamespaceParallelizationTestAssemblyRunnerContext(
     IXunitTestAssembly testAssembly,
     IReadOnlyCollection<IXunitTestCase> testCases,
     IMessageSink executionMessageSink,
-    ITestFrameworkExecutionOptions executionOptions) :
-        XunitTestAssemblyRunnerBaseContext<IXunitTestAssembly, IXunitTestCase>(testAssembly, testCases, executionMessageSink, executionOptions)
+    ITestFrameworkExecutionOptions executionOptions,
+    CancellationToken cancellationToken) :
+        XunitTestAssemblyRunnerBaseContext<IXunitTestAssembly, IXunitTestCase>(testAssembly, testCases, executionMessageSink, executionOptions, cancellationToken)
 {
     public Dictionary<Type, object> TopLevelSetupInstances { get; } = [];
 }

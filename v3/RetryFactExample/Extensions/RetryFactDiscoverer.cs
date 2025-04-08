@@ -22,6 +22,7 @@ public class RetryFactDiscoverer : IXunitTestCaseDiscoverer
             details.TestCaseDisplayName,
             details.UniqueID,
             details.Explicit,
+            details.SkipExceptions,
             details.SkipReason,
             details.SkipType,
             details.SkipUnless,

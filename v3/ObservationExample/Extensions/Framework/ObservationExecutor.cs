@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Xunit.Sdk;
 using Xunit.v3;
@@ -20,6 +21,7 @@ public class ObservationExecutor(ObservationTestAssembly testAssembly) :
     public override async ValueTask RunTestCases(
         IReadOnlyCollection<ITestCase> testCases,
         IMessageSink executionMessageSink,
-        ITestFrameworkExecutionOptions executionOptions) =>
-            await ObservationTestAssemblyRunner.Instance.Run(TestAssembly, testCases.Cast<ObservationTestCase>().ToArray(), executionMessageSink, executionOptions);
+        ITestFrameworkExecutionOptions executionOptions,
+        CancellationToken cancellationToken) =>
+            await ObservationTestAssemblyRunner.Instance.Run(TestAssembly, testCases.Cast<ObservationTestCase>().ToArray(), executionMessageSink, executionOptions, cancellationToken);
 }

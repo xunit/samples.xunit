@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using Xunit.Sdk;
 using Xunit.v3;
@@ -14,6 +15,7 @@ public class NamespaceParallelizationTestExecutor(IXunitTestAssembly testAssembl
     public override async ValueTask RunTestCases(
         IReadOnlyCollection<IXunitTestCase> testCases,
         IMessageSink executionMessageSink,
-        ITestFrameworkExecutionOptions executionOptions) =>
-            await NamespaceParallelizationTestAssemblyRunner.Instance.Run(TestAssembly, testCases, executionMessageSink, executionOptions);
+        ITestFrameworkExecutionOptions executionOptions,
+        CancellationToken cancellationToken) =>
+            await NamespaceParallelizationTestAssemblyRunner.Instance.Run(TestAssembly, testCases, executionMessageSink, executionOptions, cancellationToken);
 }
