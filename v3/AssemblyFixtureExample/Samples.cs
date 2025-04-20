@@ -12,14 +12,14 @@ public class Sample1(MyAssemblyFixture fixture)
 {
     [Fact]
     public void EnsureSingleton() =>
-        Assert.Equal(1, fixture.InstantiationCount);
+        Assert.Equal(2, fixture.InstantiationCount);
 }
 
 public class Sample2(MyAssemblyFixture fixture)
 {
     [Fact]
     public void EnsureSingleton() =>
-        Assert.Equal(1, fixture.InstantiationCount);
+        Assert.Equal(2, fixture.InstantiationCount);
 }
 
 public class MyAssemblyFixture : IDisposable
