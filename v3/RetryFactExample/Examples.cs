@@ -3,63 +3,73 @@ using Xunit;
 
 public class Examples
 {
-    // This uses [Fact], so the RunCount will only ever be one, and thus the test will fail.
-    public class FactSample
+    // We use a fixture to hold the run count, since it gets created only once for the
+    // class no matter how many times a method is run.
+    public class CounterFixture
     {
-        int counter;
+        public int RunCount;
+    }
 
-        // Each test gets its own class instance, so both of these tests will fail
-        [Fact]
-        public void IWillFail()
+    // This uses [Fact], so the RunCount will only ever be one, and thus the test will fail.
+    public class FactSample : IClassFixture<CounterFixture>
+    {
+        readonly CounterFixture counter;
+
+        public FactSample(CounterFixture counter)
         {
-            Assert.Equal(2, ++counter);
+            this.counter = counter;
+
+            counter.RunCount++;
         }
 
         [Fact]
-        public void IWillAlsoFail()
+        public void IWillFail()
         {
-            Assert.Equal(2, ++counter);
+            Assert.Equal(2, counter.RunCount);
         }
     }
 
     // This uses [RetryFact], so it will run up to the number of retries. You can set a breakpoint
     // on the test method when running it to see that it is indeed called twice. We also print out
     // a diagnostic message every time we retry, to make it easier to see the retries.
-    //
-    // The retry reuses the same class instance, so we can just use the local counter to count
-    // invocations.
-    public class RetryFactSample
+    public class RetryFactSample : IClassFixture<CounterFixture>
     {
-        int counter;
+        readonly CounterFixture counter;
 
-        // Each test gets its own class instance, so both of these tests will fail once, then pass
+        public RetryFactSample(CounterFixture counter)
+        {
+            this.counter = counter;
+
+            counter.RunCount++;
+        }
+
         [RetryFact(MaxRetries = 2)]
         public void IWillPassTheSecondTime()
         {
-            Assert.Equal(2, ++counter);
-        }
-
-        [RetryFact(MaxRetries = 2)]
-        public void IWillAlsoPassTheSecondTime()
-        {
-            Assert.Equal(2, ++counter);
+            Assert.Equal(2, counter.RunCount);
         }
     }
 
-    // Note: this sample supports theory pre-enumeration on and off, so you can use xunit.runner.json
-    // to enable or disable it, so you can trace through both paths to see how that works.
-    public class RetryTheorySample
+    public class RetryTheorySample : IClassFixture<CounterFixture>
     {
-        int counter;
+        readonly CounterFixture counter;
+
+        public RetryTheorySample(CounterFixture counter)
+        {
+            this.counter = counter;
+
+            counter.RunCount++;
+        }
 
         [RetryTheory(MaxRetries = 2)]
-        [InlineData(2)]
-        [InlineData(3)]
+        [InlineData(2)]  // Will fail once then pass
+        [InlineData(5)]  // Will fail twice
         public void TheoryMethod(int expectedCount)
         {
-            ++counter;
-
-            Assert.True(counter >= expectedCount, $"Run count was {counter}, expected at least {expectedCount}");
+            // This test uses >= rather than ==, because depending on ordering, this test
+            // will run between 3 and 4 times (depending on which data row runs first), so
+            // choosing 5 ensures we'll always fail.
+            Assert.True(counter.RunCount >= expectedCount);
         }
     }
 }

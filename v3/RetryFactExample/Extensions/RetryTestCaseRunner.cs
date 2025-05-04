@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Xunit;
 using Xunit.Sdk;
 using Xunit.v3;
 
@@ -54,20 +55,41 @@ public class RetryTestCaseRunner :
         return await Run(ctxt);
     }
 
-    protected override ValueTask<RunSummary> RunTest(
+    protected override async ValueTask<RunSummary> RunTest(
         RetryTestCaseRunnerContext ctxt,
         IXunitTest test)
     {
-        return RetryTestRunner.Instance.Run(
-            ctxt.MaxRetries,
-            test,
-            ctxt.MessageBus,
-            ctxt.ConstructorArguments,
-            ctxt.ExplicitOption,
-            ctxt.Aggregator.Clone(),
-            ctxt.CancellationTokenSource,
-            ctxt.BeforeAfterTestAttributes
-        );
+        var runCount = 0;
+        var maxRetries = ctxt.MaxRetries;
+
+        if (maxRetries < 1)
+            maxRetries = 3;
+
+        while (true)
+        {
+            // This is really the only tricky bit: we need to capture and delay messages (since those will
+            // contain run status) until we know we've decided to accept the final result.
+            var delayedMessageBus = new DelayedMessageBus(ctxt.MessageBus);
+            var aggregator = ctxt.Aggregator.Clone();
+            var result = await XunitTestRunner.Instance.Run(
+                test,
+                delayedMessageBus,
+                ctxt.ConstructorArguments,
+                ctxt.ExplicitOption,
+                aggregator,
+                ctxt.CancellationTokenSource,
+                ctxt.BeforeAfterTestAttributes
+            );
+
+            if (!(aggregator.HasExceptions || result.Failed != 0) || ++runCount >= maxRetries)
+            {
+                delayedMessageBus.Dispose();  // Sends all the delayed messages
+                return result;
+            }
+
+            TestContext.Current.SendDiagnosticMessage("Execution of '{0}' failed (attempt #{1}), retrying...", test.TestDisplayName, runCount);
+            ctxt.Aggregator.Clear();
+        }
     }
 }
 
