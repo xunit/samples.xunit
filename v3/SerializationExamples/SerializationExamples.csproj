@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(Version_Microsoft_NET_Test_Sdk)" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="$(Version_xunit_runner_visualstudio)" PrivateAssets="all" />
+    <PackageReference Include="xunit.v3" Version="$(Version_xunit_v3)" />
+  </ItemGroup>
+
+</Project>
