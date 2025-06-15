@@ -78,6 +78,9 @@ public class ObservationTestCase : ITestCase, IXunitSerializable
     ITestMethod? ITestCase.TestMethod =>
         TestMethod;
 
+    public int? TestMethodArity =>
+        TestMethod.MethodArity;
+
     int? ITestCaseMetadata.TestMethodMetadataToken =>
         TestMethod.Method.MetadataToken;
 

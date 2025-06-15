@@ -42,6 +42,9 @@ public class ObservationTestMethod : ITestMethod, IXunitSerializable
     public MethodInfo Method =>
         method ?? throw new InvalidOperationException($"Attempted to retrieve an uninitialized {nameof(ObservationTestMethod)}.{nameof(Method)}");
 
+    public int? MethodArity =>
+        Method.GetArity();
+
     public string MethodName =>
         Method.Name;
 
