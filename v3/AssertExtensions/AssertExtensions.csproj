@@ -12,8 +12,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(Version_Microsoft_NET_Test_Sdk)" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="$(Version_xunit_runner_visualstudio)" PrivateAssets="all" />
     <!--
     We want to reference xunit.v3.assert.source (so that we can extend the Assert class itself),
     which means we need to bring in references to the three individual packages instead of referencing
