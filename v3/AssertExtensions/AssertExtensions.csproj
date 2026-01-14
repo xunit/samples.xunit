@@ -24,13 +24,14 @@
 
   <!-- Need these just for .NET Framework, as .NET already has these types -->
   <ItemGroup Condition=" '$(TargetFramework)' == 'net472' ">
+    <PackageReference Include="System.Collections.Immutable" Version="10.0.2" />
     <PackageReference Include="System.Memory" Version="4.6.3" />
   </ItemGroup>
 
   <!-- Need this to allow nullable support in the source-based assertion library to work with .NET Framework -->
   <ItemGroup Condition=" '$(TargetFramework)' == 'net472' ">
     <PackageReference Include="TunnelVisionLabs.ReferenceAssemblyAnnotator" Version="1.0.0-alpha.160" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />
-    <PackageDownload Include="Microsoft.NETCore.App.Ref" Version="[8.0.11]" />
+    <PackageDownload Include="Microsoft.NETCore.App.Ref" Version="[10.0.2]" />
   </ItemGroup>
 
 </Project>
