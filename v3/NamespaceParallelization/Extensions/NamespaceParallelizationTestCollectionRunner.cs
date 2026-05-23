@@ -54,17 +54,6 @@ public class NamespaceParallelizationTestCollectionRunner :
         return await Run(ctxt);
     }
 
-    protected override ValueTask<RunSummary> RunTestClass(
-        NamespaceParallelizationTestCollectionRunnerContext ctxt,
-        IXunitTestClass? testClass,
-        IReadOnlyCollection<IXunitTestCase> testCases)
-    {
-        if (testClass is null)
-            return new(XunitRunnerHelper.FailTestCases(ctxt.MessageBus, ctxt.CancellationTokenSource, testCases, "Test case '{0}' must be backed by a test class"));
-
-        return NamespaceParallelizationTestClassRunner.Instance.Run(ctxt.StartupObject, testClass, testCases, ctxt.ExplicitOption, ctxt.MessageBus, ctxt.Aggregator.Clone(), ctxt.CancellationTokenSource);
-    }
-
     // Run everything in parallel
     protected override async ValueTask<RunSummary> RunTestClasses(
         NamespaceParallelizationTestCollectionRunnerContext ctxt,
@@ -73,9 +62,9 @@ public class NamespaceParallelizationTestCollectionRunner :
         var collectionSummary = new RunSummary();
         var tasks = new List<Task<RunSummary>>();
 
-        foreach (var testCasesByClass in ctxt.TestCases.GroupBy(tc => tc.TestMethod.TestClass, TestClassComparer.Instance))
+        foreach (var testCasesByClass in ctxt.TestCases.GroupBy(tc => tc.TestMethod.TestClass, TestClassComparer<IXunitTestClass>.Instance))
         {
-            var testClass = testCasesByClass.Key as IXunitTestClass;
+            var testClass = testCasesByClass.Key;
             var testCases = testCasesByClass.ToArray();
 
             if (exception is not null)
@@ -175,9 +164,19 @@ public class NamespaceParallelizationTestCollectionRunnerContext(
     IMessageBus messageBus,
     ExceptionAggregator aggregator,
     CancellationTokenSource cancellationTokenSource) :
-        XunitTestCollectionRunnerBaseContext<IXunitTestCollection, IXunitTestCase>(testCollection, testCases, explicitOption, messageBus, DefaultTestCaseOrderer.Instance, aggregator, cancellationTokenSource, new("Unused"))
+        XunitTestCollectionRunnerBaseContext<IXunitTestCollection, IXunitTestClass, IXunitTestCase>(testCollection, testCases, explicitOption, messageBus, aggregator, cancellationTokenSource, new("Unused"))
 {
     public object? StartupObject { get; set; }
 
     public Dictionary<Type, object> TopLevelSetupInstances { get; } = topLevelSetupInstances;
+
+    public override ValueTask<RunSummary> RunTestClass(
+        IXunitTestClass testClass,
+        IReadOnlyCollection<IXunitTestCase> testCases)
+    {
+        if (testClass is null)
+            return new(XunitRunnerHelper.FailTestCases(MessageBus, CancellationTokenSource, testCases, "Test case '{0}' must be backed by a test class"));
+
+        return NamespaceParallelizationTestClassRunner.Instance.Run(StartupObject, testClass, testCases, ExplicitOption, MessageBus, Aggregator.Clone(), CancellationTokenSource);
+    }
 }

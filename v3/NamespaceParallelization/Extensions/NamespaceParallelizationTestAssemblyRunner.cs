@@ -95,7 +95,7 @@ public class NamespaceParallelizationTestAssemblyRunnerContext(
     IMessageSink executionMessageSink,
     ITestFrameworkExecutionOptions executionOptions,
     CancellationToken cancellationToken) :
-        XunitTestAssemblyRunnerBaseContext<IXunitTestAssembly, IXunitTestCase>(testAssembly, testCases, executionMessageSink, executionOptions, cancellationToken)
+        XunitTestAssemblyRunnerBaseContext<IXunitTestAssembly, IXunitTestCollection, IXunitTestCase>(testAssembly, testCases, executionMessageSink, executionOptions, cancellationToken)
 {
     public Dictionary<Type, object> TopLevelSetupInstances { get; } = [];
 }

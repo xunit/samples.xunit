@@ -19,9 +19,10 @@ public class NamespaceParallelizationTestMethodRunner :
         IMessageBus messageBus,
         ExceptionAggregator aggregator,
         CancellationTokenSource cancellationTokenSource,
-        object?[] constructorArguments)
+        object?[] constructorArguments,
+        FixtureMappingManager classFixtureMappings)
     {
-        await using var ctxt = new NamespaceParallelizationTestMethodRunnerContext(testMethod, testCases, explicitOption, messageBus, aggregator, cancellationTokenSource, constructorArguments);
+        await using var ctxt = new NamespaceParallelizationTestMethodRunnerContext(testMethod, testCases, explicitOption, messageBus, aggregator, cancellationTokenSource, constructorArguments, classFixtureMappings);
         await ctxt.InitializeAsync();
 
         return await Run(ctxt);
@@ -64,7 +65,8 @@ public class NamespaceParallelizationTestMethodRunner :
             testCase.TestCaseDisplayName,
             testCase.SkipReason,
             ctxt.ExplicitOption,
-            ctxt.ConstructorArguments
+            ctxt.ConstructorArguments,
+            ctxt.MethodFixtureMappings
         );
     }
 
@@ -97,6 +99,7 @@ public class NamespaceParallelizationTestMethodRunnerContext(
     IMessageBus messageBus,
     ExceptionAggregator aggregator,
     CancellationTokenSource cancellationTokenSource,
-    object?[] constructorArguments) :
-        XunitTestMethodRunnerBaseContext<IXunitTestMethod, IXunitTestCase>(testMethod, testCases, explicitOption, messageBus, aggregator, cancellationTokenSource, constructorArguments)
+    object?[] constructorArguments,
+    FixtureMappingManager classFixtureMappings) :
+        XunitTestMethodRunnerBaseContext<IXunitTestMethod, IXunitTestCase>(testMethod, testCases, explicitOption, messageBus, aggregator, cancellationTokenSource, constructorArguments, classFixtureMappings)
 { }

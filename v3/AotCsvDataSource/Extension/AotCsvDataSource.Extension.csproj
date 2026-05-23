@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Nullable>enable</Nullable>
+    <RootNamespace>AotCsvDataSource</RootNamespace>
+    <TargetFramework>net9.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Sep" Version="0.14.1" />
+    <PackageReference Include="xunit.v3.extensibility.core.aot" Version="$(Version_xunit_v3)" />
+  </ItemGroup>
+
+</Project>

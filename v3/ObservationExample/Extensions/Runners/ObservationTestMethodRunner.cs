@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit.Sdk;
@@ -10,6 +11,9 @@ public class ObservationTestMethodRunner :
     TestMethodRunner<ObservationTestMethodRunnerContext, ObservationTestMethod, ObservationTestCase>
 {
     public static ObservationTestMethodRunner Instance { get; } = new();
+
+    protected override IReadOnlyCollection<ObservationTestCase> OrderTestCases(ObservationTestMethodRunnerContext ctxt) =>
+        [.. ctxt.TestCases.OrderBy(tc => tc.Order)];
 
     public async ValueTask<RunSummary> Run(
         Specification specification,

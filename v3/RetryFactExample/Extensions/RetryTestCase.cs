@@ -49,6 +49,7 @@ public class RetryTestCase : XunitTestCase, ISelfExecutingXunitTestCase
         ExplicitOption explicitOption,
         IMessageBus messageBus,
         object?[] constructorArguments,
+        FixtureMappingManager methodFixtureMappings,
         ExceptionAggregator aggregator,
         CancellationTokenSource cancellationTokenSource) =>
             RetryTestCaseRunner.Instance.Run(
@@ -60,7 +61,8 @@ public class RetryTestCase : XunitTestCase, ISelfExecutingXunitTestCase
                 TestCaseDisplayName,
                 SkipReason,
                 explicitOption,
-                constructorArguments
+                constructorArguments,
+                methodFixtureMappings
             );
 
     protected override void Serialize(IXunitSerializationInfo info)

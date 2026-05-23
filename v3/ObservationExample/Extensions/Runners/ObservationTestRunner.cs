@@ -27,7 +27,18 @@ public class ObservationTestRunner :
     protected override ValueTask<TimeSpan> InvokeTest(
         ObservationTestRunnerContext ctxt,
         object? testClassInstance) =>
-            base.InvokeTest(ctxt, ctxt.Specification);
+            ExecutionTimer.MeasureAsync(
+                () => ctxt.Aggregator.RunAsync(
+                    async () =>
+                    {
+                        var instance = testClassInstance;
+                        var result = ctxt.Test.TestCase.TestMethod.Method.Invoke(ctxt.Specification, []);
+                        var valueTask = AsyncUtility.TryConvertToValueTask(result);
+                        if (valueTask.HasValue)
+                            await valueTask.Value;
+                    }
+                )
+            );
 
     public async ValueTask<RunSummary> Run(
         Specification specification,
@@ -51,7 +62,7 @@ public class ObservationTestRunnerContext(
     string? skipReason,
     ExceptionAggregator aggregator,
     CancellationTokenSource cancellationTokenSource) :
-        TestRunnerContext<ObservationTest>(test, messageBus, skipReason, ExplicitOption.Off, aggregator, cancellationTokenSource, test.TestCase.TestMethod.Method, [])
+        TestRunnerContext<ObservationTest>(test, messageBus, skipReason, ExplicitOption.Off, aggregator, cancellationTokenSource)
 {
     public Specification Specification { get; } = specification;
 }

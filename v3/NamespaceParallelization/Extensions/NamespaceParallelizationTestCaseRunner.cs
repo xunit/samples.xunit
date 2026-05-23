@@ -22,9 +22,10 @@ public class NamespaceParallelizationTestCaseRunner :
         string displayName,
         string? skipReason,
         ExplicitOption explicitOption,
-        object?[] constructorArguments)
+        object?[] constructorArguments,
+        FixtureMappingManager methodFixtureMappings)
     {
-        await using var ctxt = new NamespaceParallelizationTestCaseRunnerContext(testCase, tests, messageBus, aggregator, cancellationTokenSource, displayName, skipReason, explicitOption, constructorArguments);
+        await using var ctxt = new NamespaceParallelizationTestCaseRunnerContext(testCase, tests, messageBus, aggregator, cancellationTokenSource, displayName, skipReason, explicitOption, constructorArguments, methodFixtureMappings);
         await ctxt.InitializeAsync();
 
         return await Run(ctxt);
@@ -33,7 +34,7 @@ public class NamespaceParallelizationTestCaseRunner :
     protected override ValueTask<RunSummary> RunTest(
         NamespaceParallelizationTestCaseRunnerContext ctxt,
         IXunitTest test) =>
-            XunitTestRunner.Instance.Run(test, ctxt.MessageBus, ctxt.ConstructorArguments, ctxt.ExplicitOption, ctxt.Aggregator.Clone(), ctxt.CancellationTokenSource, ctxt.BeforeAfterTestAttributes);
+            XunitTestRunner.Instance.Run(test, ctxt.MessageBus, ctxt.ConstructorArguments, ctxt.ExplicitOption, ctxt.Aggregator.Clone(), ctxt.CancellationTokenSource, ctxt.BeforeAfterTestAttributes, ctxt.CaseFixtureMappings);
 
     // Run everything in parallel
     protected override async ValueTask<RunSummary> RunTestCase(NamespaceParallelizationTestCaseRunnerContext ctxt, Exception? exception)
@@ -66,6 +67,7 @@ public class NamespaceParallelizationTestCaseRunnerContext(
     string displayName,
     string? skipReason,
     ExplicitOption explicitOption,
-    object?[] constructorArguments) :
-        XunitTestCaseRunnerBaseContext<IXunitTestCase, IXunitTest>(testCase, tests, messageBus, aggregator, cancellationTokenSource, displayName, skipReason, explicitOption, constructorArguments)
+    object?[] constructorArguments,
+    FixtureMappingManager methodFixtureMappings) :
+        XunitTestCaseRunnerBaseContext<IXunitTestCase, IXunitTest>(testCase, tests, messageBus, aggregator, cancellationTokenSource, displayName, skipReason, explicitOption, constructorArguments, methodFixtureMappings)
 { }

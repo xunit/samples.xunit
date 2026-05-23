@@ -1,0 +1,62 @@
+<Solution>
+  <Folder Name="/Cross-Cutting Concerns/">
+    <Project Path="AssumeIdentityExample/AssumeIdentityExample.csproj" />
+    <Project Path="AutoRollbackExample/AutoRollbackExample.csproj" />
+    <Project Path="UseCultureExample/UseCultureExample.csproj" />
+  </Folder>
+  <Folder Name="/Custom Assertions/">
+    <Project Path="AssertExtensions/AssertExtensions.csproj" />
+  </Folder>
+  <Folder Name="/Fixture Examples/">
+    <Project Path="AssemblyFixtureExample/AssemblyFixtureExample.csproj" />
+    <Project Path="DatabaseFixtureExample/DatabaseFixtureExample.csproj" />
+  </Folder>
+  <Folder Name="/Runners/">
+    <Project Path="TestRunner/TestRunner.csproj" />
+  </Folder>
+  <Folder Name="/Sample Tests/">
+    <Project Path="AssertExamples/AssertExamples.csproj" />
+    <Project Path="StackSample/StackSample.csproj" />
+    <Project Path="TestOutputExample/TestOutputExample.csproj" />
+  </Folder>
+  <Folder Name="/Test Framework Customization/">
+    <Project Path="NamespaceParallelization/NamespaceParallelization.csproj" />
+    <Project Path="ObservationExample/ObservationExample.csproj" />
+    <Project Path="SerializationExamples/SerializationExamples.csproj" />
+    <Project Path="TestOrderExamples/TestOrderExamples.csproj" />
+  </Folder>
+  <Folder Name="/Test Method Extensibility/" />
+  <Folder Name="/Test Method Extensibility/Native AOT/">
+    <Project Path="AotRetryFact/Extension/AotRetryFact.Extension.csproj" />
+    <Project Path="AotRetryFact/Generator/AotRetryFact.Generator.csproj" />
+    <Project Path="AotRetryFact/Sample/AotRetryFact.Sample.csproj" />
+  </Folder>
+  <Folder Name="/Test Method Extensibility/Reflection/">
+    <Project Path="RetryFactExample/RetryFactExample.csproj" />
+  </Folder>
+  <Folder Name="/Theory Data Extensibility/" />
+  <Folder Name="/Theory Data Extensibility/Native AOT/">
+    <Project Path="AotCsvDataSource/Extension/AotCsvDataSource.Extension.csproj" />
+    <Project Path="AotCsvDataSource/Generator/AotCsvDataSource.Generator.csproj" />
+    <Project Path="AotCsvDataSource/Sample/AotCsvDataSource.Sample.csproj" />
+  </Folder>
+  <Folder Name="/Theory Data Extensibility/Reflection/">
+    <Project Path="SqlDataExample/SqlDataExample.csproj" />
+  </Folder>
+  <Folder Name="/Trait Extensibility/" />
+  <Folder Name="/Trait Extensibility/Native AOT/">
+    <Project Path="AotTraitExtensibility/Extension/AotTraitExtensibility.Extension.csproj" />
+    <Project Path="AotTraitExtensibility/Generator/AotTraitExtensibility.Generator.csproj" />
+    <Project Path="AotTraitExtensibility/Sample/AotTraitExtensibility.Sample.csproj" />
+  </Folder>
+  <Folder Name="/Trait Extensibility/Reflection/">
+    <Project Path="TraitExtensibilityExample/TraitExtensibilityExample.csproj" />
+  </Folder>
+  <Folder Name="/_Meta/">
+    <File Path="../.gitattributes" />
+    <File Path="../.gitignore" />
+    <File Path="../NuGet.Config" />
+    <File Path=".editorconfig" />
+    <File Path="Directory.Build.props" />
+  </Folder>
+</Solution>

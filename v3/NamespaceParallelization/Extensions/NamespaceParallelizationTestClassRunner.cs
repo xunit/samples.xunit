@@ -37,16 +37,19 @@ public class NamespaceParallelizationTestClassRunner :
         return await Run(ctxt);
     }
 
-    protected override ValueTask<RunSummary> RunTestMethod(
+    protected override async ValueTask<RunSummary> RunTestMethod(
         NamespaceParallelizationTestClassRunnerContext ctxt,
         IXunitTestMethod? testMethod,
-        IReadOnlyCollection<IXunitTestCase> testCases,
-        object?[] constructorArguments)
+        IReadOnlyCollection<IXunitTestCase> testCases)
     {
         if (testMethod is null)
-            return new(XunitRunnerHelper.FailTestCases(ctxt.MessageBus, ctxt.CancellationTokenSource, testCases, "Test case '{0}' must be backed by a test method"));
+            return XunitRunnerHelper.FailTestCases(ctxt.MessageBus, ctxt.CancellationTokenSource, testCases, "Test case '{0}' must be backed by a test method");
 
-        return NamespaceParallelizationTestMethodRunner.Instance.Run(testMethod, testCases, ctxt.ExplicitOption, ctxt.MessageBus, ctxt.Aggregator.Clone(), ctxt.CancellationTokenSource, constructorArguments);
+        var constructorArguments = await CreateTestClassConstructorArguments(ctxt);
+        if (ctxt.Aggregator.ToException() is { } exception)
+            return XunitRunnerHelper.FailTestCases(ctxt.MessageBus, ctxt.CancellationTokenSource, testCases, exception);
+
+        return await NamespaceParallelizationTestMethodRunner.Instance.Run(testMethod, testCases, ctxt.ExplicitOption, ctxt.MessageBus, ctxt.Aggregator.Clone(), ctxt.CancellationTokenSource, constructorArguments, ctxt.ClassFixtureMappings);
     }
 
     // Run everything in parallel
@@ -54,29 +57,18 @@ public class NamespaceParallelizationTestClassRunner :
         NamespaceParallelizationTestClassRunnerContext ctxt,
         Exception? exception)
     {
-        object?[] constructorArguments;
-
-        if (exception is not null)
-            constructorArguments = [];
-        else
-        {
-            constructorArguments = await CreateTestClassConstructorArguments(ctxt);
-            exception = ctxt.Aggregator.ToException();
-            ctxt.Aggregator.Clear();
-        }
-
         var tasks = new List<Task<RunSummary>>();
         var testClassSummary = new RunSummary();
 
-        foreach (var method in ctxt.TestCases.GroupBy(tc => tc.TestMethod, TestMethodComparer.Instance))
+        foreach (var method in ctxt.TestCases.GroupBy(tc => tc.TestMethod, TestMethodComparer<IXunitTestMethod>.Instance))
         {
             var testMethod = method.Key as IXunitTestMethod;
             var testCases = method.CastOrToReadOnlyCollection();
 
             if (exception is not null)
-                tasks.Add(Task.Run(async () => await FailTestMethod(ctxt, testMethod, testCases, constructorArguments, exception), ctxt.CancellationTokenSource.Token));
+                tasks.Add(Task.Run(async () => await FailTestMethod(ctxt, testMethod, testCases, exception), ctxt.CancellationTokenSource.Token));
             else
-                tasks.Add(Task.Run(async () => await RunTestMethod(ctxt, testMethod, testCases, constructorArguments), ctxt.CancellationTokenSource.Token));
+                tasks.Add(Task.Run(async () => await RunTestMethod(ctxt, testMethod, testCases), ctxt.CancellationTokenSource.Token));
         }
 
         var testCaseSummaries = await Task.WhenAll(tasks);
@@ -95,7 +87,7 @@ public class NamespaceParallelizationTestClassRunnerContext(
     IMessageBus messageBus,
     ExceptionAggregator aggregator,
     CancellationTokenSource cancellationTokenSource) :
-        XunitTestClassRunnerBaseContext<IXunitTestClass, IXunitTestCase>(testClass, testCases, explicitOption, messageBus, DefaultTestCaseOrderer.Instance, aggregator, cancellationTokenSource, new("Unused"))
+        XunitTestClassRunnerBaseContext<IXunitTestClass, IXunitTestMethod, IXunitTestCase>(testClass, testCases, explicitOption, messageBus, aggregator, cancellationTokenSource, new("Unused"))
 {
     public object? StartupObject { get; } = startupObject;
 }

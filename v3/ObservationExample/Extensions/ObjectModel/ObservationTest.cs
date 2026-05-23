@@ -11,6 +11,8 @@ public class ObservationTest(ObservationTestCase testCase) :
 
     public string TestDisplayName { get; } = testCase.TestCaseDisplayName;
 
+    public string? TestLabel => null;
+
     public IReadOnlyDictionary<string, IReadOnlyCollection<string>> Traits =>
         TestCase.Traits;
 

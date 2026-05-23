@@ -22,7 +22,8 @@ public class RetryTestCaseRunner :
         string displayName,
         string? skipReason,
         ExplicitOption explicitOption,
-        object?[] constructorArguments)
+        object?[] constructorArguments,
+        FixtureMappingManager methodFixtureMappings)
     {
         // This code comes from XunitRunnerHelper.RunXunitTestCase, and it's centralized
         // here just so we don't have to duplicate it in both RetryTestCase and
@@ -49,7 +50,7 @@ public class RetryTestCaseRunner :
                 );
         }
 
-        await using var ctxt = new RetryTestCaseRunnerContext(maxRetries, testCase, tests, messageBus, aggregator, cancellationTokenSource, displayName, skipReason, explicitOption, constructorArguments);
+        await using var ctxt = new RetryTestCaseRunnerContext(maxRetries, testCase, tests, messageBus, aggregator, cancellationTokenSource, displayName, skipReason, explicitOption, constructorArguments, methodFixtureMappings);
         await ctxt.InitializeAsync();
 
         return await Run(ctxt);
@@ -78,7 +79,8 @@ public class RetryTestCaseRunner :
                 ctxt.ExplicitOption,
                 aggregator,
                 ctxt.CancellationTokenSource,
-                ctxt.BeforeAfterTestAttributes
+                ctxt.BeforeAfterTestAttributes,
+                ctxt.CaseFixtureMappings
             );
 
             if (!(aggregator.HasExceptions || result.Failed != 0) || ++runCount >= maxRetries)
@@ -103,8 +105,9 @@ public class RetryTestCaseRunnerContext(
     string displayName,
     string? skipReason,
     ExplicitOption explicitOption,
-    object?[] constructorArguments) :
-        XunitTestCaseRunnerBaseContext<IXunitTestCase, IXunitTest>(testCase, tests, messageBus, aggregator, cancellationTokenSource, displayName, skipReason, explicitOption, constructorArguments)
+    object?[] constructorArguments,
+    FixtureMappingManager methodFixtureMappings) :
+        XunitTestCaseRunnerBaseContext<IXunitTestCase, IXunitTest>(testCase, tests, messageBus, aggregator, cancellationTokenSource, displayName, skipReason, explicitOption, constructorArguments, methodFixtureMappings)
 {
     public int MaxRetries { get; } = maxRetries;
 }

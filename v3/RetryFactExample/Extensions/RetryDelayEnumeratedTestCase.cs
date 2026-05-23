@@ -48,6 +48,7 @@ public class RetryDelayEnumeratedTestCase : XunitDelayEnumeratedTheoryTestCase, 
         ExplicitOption explicitOption,
         IMessageBus messageBus,
         object?[] constructorArguments,
+        FixtureMappingManager methodFixtureMappings,
         ExceptionAggregator aggregator,
         CancellationTokenSource cancellationTokenSource) =>
             RetryTestCaseRunner.Instance.Run(
@@ -59,7 +60,8 @@ public class RetryDelayEnumeratedTestCase : XunitDelayEnumeratedTheoryTestCase, 
                 TestCaseDisplayName,
                 SkipReason,
                 explicitOption,
-                constructorArguments
+                constructorArguments,
+                methodFixtureMappings
             );
 
     protected override void Serialize(IXunitSerializationInfo info)
