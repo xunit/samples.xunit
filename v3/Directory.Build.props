@@ -2,8 +2,8 @@
 
   <!-- Common package versions -->
   <PropertyGroup>
-    <Version_xunit_analyzers>2.0.0-pre.51</Version_xunit_analyzers>
-    <Version_xunit_v3>4.0.0-pre.124</Version_xunit_v3>
+    <Version_xunit_analyzers>2.0.0-pre.56</Version_xunit_analyzers>
+    <Version_xunit_v3>4.0.0-pre.128</Version_xunit_v3>
   </PropertyGroup>
 
   <PropertyGroup>
