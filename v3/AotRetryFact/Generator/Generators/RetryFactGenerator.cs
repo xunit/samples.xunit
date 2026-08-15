@@ -21,7 +21,7 @@ public class RetryFactGenerator : ITestMethodGenerator
         if (!validReturnTypes.Contains(testMethod.ReturnType.ToCSharp(includeGlobal: false)))
             return null;
 
-        var details = new FactMethodDetails(semanticModel, testClass, testMethodSyntax, testMethod, attribute);
+        var details = new FactMethodDetails(testClass, testMethodSyntax, testMethod, attribute);
         if (!details.Process())
             return null;
 

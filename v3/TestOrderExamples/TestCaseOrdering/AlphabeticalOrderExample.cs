@@ -1,7 +1,7 @@
 using TestOrderExamples.TestCaseOrdering;
 using Xunit;
 
-[TestCaseOrderer(typeof(AlphabeticalOrderer))]
+[TestMethodOrderer(typeof(AlphabeticalOrderer))]
 public class AlphabeticalOrderExample
 {
     static bool Test1Called;

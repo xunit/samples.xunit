@@ -16,12 +16,14 @@ public class RetryTestCaseRunner :
     public async ValueTask<RunSummary> Run(
         int maxRetries,
         IXunitTestCase testCase,
+        ExplicitOption explicitOption,
         IMessageBus messageBus,
         ExceptionAggregator aggregator,
-        CancellationTokenSource cancellationTokenSource,
         string displayName,
         string? skipReason,
-        ExplicitOption explicitOption,
+        CancellationTokenSource cancellationTokenSource,
+        ParallelMode parallelMode,
+        ExecutionScheduler scheduler,
         object?[] constructorArguments,
         FixtureMappingManager methodFixtureMappings)
     {
@@ -50,7 +52,21 @@ public class RetryTestCaseRunner :
                 );
         }
 
-        await using var ctxt = new RetryTestCaseRunnerContext(maxRetries, testCase, tests, messageBus, aggregator, cancellationTokenSource, displayName, skipReason, explicitOption, constructorArguments, methodFixtureMappings);
+        await using var ctxt = new RetryTestCaseRunnerContext(
+            maxRetries,
+            testCase,
+            tests,
+            explicitOption,
+            messageBus,
+            aggregator,
+            displayName,
+            skipReason,
+            cancellationTokenSource,
+            parallelMode,
+            scheduler,
+            constructorArguments,
+            methodFixtureMappings
+        );
         await ctxt.InitializeAsync();
 
         return await Run(ctxt);
@@ -79,6 +95,8 @@ public class RetryTestCaseRunner :
                 ctxt.ExplicitOption,
                 aggregator,
                 ctxt.CancellationTokenSource,
+                ctxt.ParallelMode,
+                ctxt.Scheduler,
                 ctxt.BeforeAfterTestAttributes,
                 ctxt.CaseFixtureMappings
             );
@@ -99,15 +117,17 @@ public class RetryTestCaseRunnerContext(
     int maxRetries,
     IXunitTestCase testCase,
     IReadOnlyCollection<IXunitTest> tests,
+    ExplicitOption explicitOption,
     IMessageBus messageBus,
     ExceptionAggregator aggregator,
-    CancellationTokenSource cancellationTokenSource,
     string displayName,
     string? skipReason,
-    ExplicitOption explicitOption,
+    CancellationTokenSource cancellationTokenSource,
+    ParallelMode parallelMode,
+    ExecutionScheduler scheduler,
     object?[] constructorArguments,
     FixtureMappingManager methodFixtureMappings) :
-        XunitTestCaseRunnerBaseContext<IXunitTestCase, IXunitTest>(testCase, tests, messageBus, aggregator, cancellationTokenSource, displayName, skipReason, explicitOption, constructorArguments, methodFixtureMappings)
+        XunitTestCaseRunnerBaseContext<IXunitTestCase, IXunitTest>(testCase, tests, explicitOption, messageBus, aggregator, displayName, skipReason, cancellationTokenSource, parallelMode, scheduler, constructorArguments, methodFixtureMappings)
 {
     public int MaxRetries { get; } = maxRetries;
 }

@@ -21,6 +21,8 @@ public class RetryTestCaseRunnerContext(
     string displayName,
     string? skipReason,
     CancellationTokenSource cancellationTokenSource,
+    ParallelMode parallelMode,
+    ExecutionScheduler scheduler,
     FixtureMappingManager methodFixtureMappings) :
         CodeGenTestCaseRunnerBaseContext<RetryTestCase, ICodeGenTest>(
             testCase,
@@ -31,6 +33,8 @@ public class RetryTestCaseRunnerContext(
             displayName,
             skipReason,
             cancellationTokenSource,
+            parallelMode,
+            scheduler,
             methodFixtureMappings
         )
 {
@@ -48,7 +52,7 @@ public class RetryTestCaseRunnerContext(
             var aggregator = Aggregator.Clone();
             // There's nothing special about running our test objects, so we rely on the built-in CodeGenTest
             // class and the associated CodeGenTestRunner runner to run them
-            var result = await CodeGenTestRunner.Instance.Run(test, delayedMessageBus, ExplicitOption, aggregator, CancellationTokenSource, CaseFixtureMappings);
+            var result = await CodeGenTestRunner.Instance.Run(test, delayedMessageBus, ExplicitOption, aggregator, CancellationTokenSource, ParallelMode, Scheduler, CaseFixtureMappings);
 
             if (!(aggregator.HasExceptions || result.Failed != 0) || ++runCount >= maxRetries)
             {

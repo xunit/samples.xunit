@@ -4,9 +4,6 @@ using Xunit;
 // Set the orderer
 [assembly: TestCollectionOrderer(typeof(DisplayNameOrderer))]
 
-// Need to turn off test parallelization so we can validate the run order
-[assembly: CollectionBehavior(DisableTestParallelization = true)]
-
 public class DisplayNameOrderExample
 {
     [CollectionDefinition("Xyz Test Collection")]

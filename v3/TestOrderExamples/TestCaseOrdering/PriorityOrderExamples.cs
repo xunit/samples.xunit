@@ -1,7 +1,7 @@
 using TestOrderExamples.TestCaseOrdering;
 using Xunit;
 
-[TestCaseOrderer(typeof(PriorityOrderer))]
+[TestMethodOrderer(typeof(PriorityOrderer))]
 public class PriorityOrderExamples
 {
     public static bool Test1Called;

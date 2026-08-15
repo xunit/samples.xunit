@@ -29,9 +29,20 @@ public class NamespaceParallelizationTestClassRunner :
         ExplicitOption explicitOption,
         IMessageBus messageBus,
         ExceptionAggregator aggregator,
-        CancellationTokenSource cancellationTokenSource)
+        CancellationTokenSource cancellationTokenSource,
+        ParallelMode parallelMode,
+        ExecutionScheduler scheduler)
     {
-        await using var ctxt = new NamespaceParallelizationTestClassRunnerContext(startupObject, testClass, testCases, explicitOption, messageBus, aggregator, cancellationTokenSource);
+        await using var ctxt = new NamespaceParallelizationTestClassRunnerContext(
+            startupObject,
+            testClass,
+            testCases,
+            explicitOption,
+            messageBus,
+            aggregator,
+            cancellationTokenSource,
+            parallelMode,
+            scheduler);
         await ctxt.InitializeAsync();
 
         return await Run(ctxt);
@@ -49,7 +60,17 @@ public class NamespaceParallelizationTestClassRunner :
         if (ctxt.Aggregator.ToException() is { } exception)
             return XunitRunnerHelper.FailTestCases(ctxt.MessageBus, ctxt.CancellationTokenSource, testCases, exception);
 
-        return await NamespaceParallelizationTestMethodRunner.Instance.Run(testMethod, testCases, ctxt.ExplicitOption, ctxt.MessageBus, ctxt.Aggregator.Clone(), ctxt.CancellationTokenSource, constructorArguments, ctxt.ClassFixtureMappings);
+        return await NamespaceParallelizationTestMethodRunner.Instance.Run(
+            testMethod,
+            testCases,
+            ctxt.ExplicitOption,
+            ctxt.MessageBus,
+            ctxt.Aggregator.Clone(),
+            ctxt.CancellationTokenSource,
+            ctxt.ParallelMode,
+            ctxt.Scheduler,
+            constructorArguments,
+            ctxt.ClassFixtureMappings);
     }
 
     // Run everything in parallel
@@ -86,8 +107,20 @@ public class NamespaceParallelizationTestClassRunnerContext(
     ExplicitOption explicitOption,
     IMessageBus messageBus,
     ExceptionAggregator aggregator,
-    CancellationTokenSource cancellationTokenSource) :
-        XunitTestClassRunnerBaseContext<IXunitTestClass, IXunitTestMethod, IXunitTestCase>(testClass, testCases, explicitOption, messageBus, aggregator, cancellationTokenSource, new("Unused"))
+    CancellationTokenSource cancellationTokenSource,
+    ParallelMode parallelMode,
+    ExecutionScheduler scheduler) :
+        XunitTestClassRunnerBaseContext<IXunitTestClass, IXunitTestMethod, IXunitTestCase>(
+            testClass,
+            testCases,
+            explicitOption,
+            messageBus,
+            aggregator,
+            cancellationTokenSource,
+            parallelMode,
+            scheduler,
+            new("Unused")
+        )
 {
     public object? StartupObject { get; } = startupObject;
 }

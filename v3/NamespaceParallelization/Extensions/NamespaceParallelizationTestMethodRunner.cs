@@ -19,10 +19,23 @@ public class NamespaceParallelizationTestMethodRunner :
         IMessageBus messageBus,
         ExceptionAggregator aggregator,
         CancellationTokenSource cancellationTokenSource,
+        ParallelMode parallelMode,
+        ExecutionScheduler scheduler,
         object?[] constructorArguments,
         FixtureMappingManager classFixtureMappings)
     {
-        await using var ctxt = new NamespaceParallelizationTestMethodRunnerContext(testMethod, testCases, explicitOption, messageBus, aggregator, cancellationTokenSource, constructorArguments, classFixtureMappings);
+        await using var ctxt = new NamespaceParallelizationTestMethodRunnerContext(
+            testMethod,
+            testCases,
+            explicitOption,
+            messageBus,
+            aggregator,
+            cancellationTokenSource,
+            parallelMode,
+            scheduler,
+            constructorArguments,
+            classFixtureMappings
+        );
         await ctxt.InitializeAsync();
 
         return await Run(ctxt);
@@ -59,12 +72,14 @@ public class NamespaceParallelizationTestMethodRunner :
         return await NamespaceParallelizationTestCaseRunner.Instance.Run(
             testCase,
             tests,
+            ctxt.ExplicitOption,
             ctxt.MessageBus,
             ctxt.Aggregator,
-            ctxt.CancellationTokenSource,
             testCase.TestCaseDisplayName,
             testCase.SkipReason,
-            ctxt.ExplicitOption,
+            ctxt.CancellationTokenSource,
+            ctxt.ParallelMode,
+            ctxt.Scheduler,
             ctxt.ConstructorArguments,
             ctxt.MethodFixtureMappings
         );
@@ -99,7 +114,20 @@ public class NamespaceParallelizationTestMethodRunnerContext(
     IMessageBus messageBus,
     ExceptionAggregator aggregator,
     CancellationTokenSource cancellationTokenSource,
+    ParallelMode parallelMode,
+    ExecutionScheduler scheduler,
     object?[] constructorArguments,
     FixtureMappingManager classFixtureMappings) :
-        XunitTestMethodRunnerBaseContext<IXunitTestMethod, IXunitTestCase>(testMethod, testCases, explicitOption, messageBus, aggregator, cancellationTokenSource, constructorArguments, classFixtureMappings)
+        XunitTestMethodRunnerBaseContext<IXunitTestMethod, IXunitTestCase>(
+            testMethod,
+            testCases,
+            explicitOption,
+            messageBus,
+            aggregator,
+            cancellationTokenSource,
+            parallelMode,
+            scheduler,
+            constructorArguments,
+            classFixtureMappings
+        )
 { }

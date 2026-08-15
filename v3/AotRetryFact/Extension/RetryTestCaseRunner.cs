@@ -20,6 +20,8 @@ public class RetryTestCaseRunner : CodeGenTestCaseRunnerBase<RetryTestCaseRunner
         string displayName,
         string? skipReason,
         CancellationTokenSource cancellationTokenSource,
+        ParallelMode parallelMode,
+        ExecutionScheduler scheduler,
         FixtureMappingManager methodFixtureMappings)
     {
         await using var ctxt = new RetryTestCaseRunnerContext(
@@ -31,6 +33,8 @@ public class RetryTestCaseRunner : CodeGenTestCaseRunnerBase<RetryTestCaseRunner
             displayName,
             skipReason,
             cancellationTokenSource,
+            parallelMode,
+            scheduler,
             methodFixtureMappings
         );
         await ctxt.InitializeAsync();

@@ -6,13 +6,13 @@ using Xunit.v3;
 
 namespace TestOrderExamples.TestCaseOrdering;
 
-public class AlphabeticalOrderer : ITestCaseOrderer
+public class AlphabeticalOrderer : ITestMethodOrderer
 {
-    public IReadOnlyCollection<TTestCase> OrderTestCases<TTestCase>(IReadOnlyCollection<TTestCase> testCases)
-        where TTestCase : notnull, ITestCase
+    public IReadOnlyCollection<TTestMethod?> OrderTestMethods<TTestMethod>(IReadOnlyCollection<TTestMethod?> testMethods)
+        where TTestMethod : notnull, ITestMethod
     {
-        var result = testCases.Cast<IXunitTestCase>().ToList();
-        result.Sort((x, y) => StringComparer.OrdinalIgnoreCase.Compare(x.TestMethod.Method.Name, y.TestMethod.Method.Name));
-        return result.Cast<TTestCase>().ToArray();
+        var result = testMethods.Cast<IXunitTestMethod>().ToList();
+        result.Sort((x, y) => StringComparer.OrdinalIgnoreCase.Compare(x.Method.Name, y.Method.Name));
+        return [.. result.Cast<TTestMethod>()];
     }
 }

@@ -53,7 +53,9 @@ public class NamespaceParallelizationTestAssemblyRunner :
                 ctxt.ExplicitOption,
                 ctxt.MessageBus,
                 ctxt.Aggregator.Clone(),
-                ctxt.CancellationTokenSource
+                ctxt.CancellationTokenSource,
+                ctxt.ParallelMode,
+                ctxt.Scheduler
             );
 
     // Always run all collections sequentially, since each collection represents a namespace, and we want tests inside a

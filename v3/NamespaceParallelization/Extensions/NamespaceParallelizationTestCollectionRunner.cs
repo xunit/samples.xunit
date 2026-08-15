@@ -46,9 +46,21 @@ public class NamespaceParallelizationTestCollectionRunner :
         ExplicitOption explicitOption,
         IMessageBus messageBus,
         ExceptionAggregator aggregator,
-        CancellationTokenSource cancellationTokenSource)
+        CancellationTokenSource cancellationTokenSource,
+        ParallelMode parallelMode,
+        ExecutionScheduler scheduler)
     {
-        await using var ctxt = new NamespaceParallelizationTestCollectionRunnerContext(topLevelSetupInstances, testCollection, testCases, explicitOption, messageBus, aggregator, cancellationTokenSource);
+        await using var ctxt = new NamespaceParallelizationTestCollectionRunnerContext(
+            topLevelSetupInstances,
+            testCollection,
+            testCases,
+            explicitOption,
+            messageBus,
+            aggregator,
+            cancellationTokenSource,
+            parallelMode,
+            scheduler
+        );
         await ctxt.InitializeAsync();
 
         return await Run(ctxt);
@@ -163,8 +175,20 @@ public class NamespaceParallelizationTestCollectionRunnerContext(
     ExplicitOption explicitOption,
     IMessageBus messageBus,
     ExceptionAggregator aggregator,
-    CancellationTokenSource cancellationTokenSource) :
-        XunitTestCollectionRunnerBaseContext<IXunitTestCollection, IXunitTestClass, IXunitTestCase>(testCollection, testCases, explicitOption, messageBus, aggregator, cancellationTokenSource, new("Unused"))
+    CancellationTokenSource cancellationTokenSource,
+    ParallelMode parallelMode,
+    ExecutionScheduler scheduler) :
+        XunitTestCollectionRunnerBaseContext<IXunitTestCollection, IXunitTestClass, IXunitTestCase>(
+            testCollection,
+            testCases,
+            explicitOption,
+            messageBus,
+            aggregator,
+            cancellationTokenSource,
+            parallelMode,
+            scheduler,
+            new("Unused")
+        )
 {
     public object? StartupObject { get; set; }
 
@@ -177,6 +201,16 @@ public class NamespaceParallelizationTestCollectionRunnerContext(
         if (testClass is null)
             return new(XunitRunnerHelper.FailTestCases(MessageBus, CancellationTokenSource, testCases, "Test case '{0}' must be backed by a test class"));
 
-        return NamespaceParallelizationTestClassRunner.Instance.Run(StartupObject, testClass, testCases, ExplicitOption, MessageBus, Aggregator.Clone(), CancellationTokenSource);
+        return NamespaceParallelizationTestClassRunner.Instance.Run(
+            StartupObject,
+            testClass,
+            testCases,
+            ExplicitOption,
+            MessageBus,
+            Aggregator.Clone(),
+            CancellationTokenSource,
+            ParallelMode,
+            Scheduler
+        );
     }
 }

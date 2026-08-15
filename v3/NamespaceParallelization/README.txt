@@ -1,3 +1,7 @@
+===================
+TODO: Can this be made easier now that full parallelization is available?
+===================
+
 Namespace Parallelization Sample
 
 This sample project arose from a [discussion question](https://github.com/xunit/xunit/discussions/2924) about whether it would be possible for xUnit.net to be able to significantly change the way it does parallelization.

@@ -24,7 +24,7 @@ public class RetryTheoryGenerator : ITestMethodGenerator
         if (testMethod.IsGenericMethod || testMethod.Parameters.Any(p => p.IsParams))
             return null;
 
-        var details = new TheoryMethodDetails(semanticModel, testClass, testMethodSyntax, testMethod, attribute);
+        var details = new TheoryMethodDetails(testClass, testMethodSyntax, testMethod, attribute);
         if (!details.Process())
             return null;
 

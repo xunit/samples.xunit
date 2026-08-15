@@ -7,7 +7,7 @@ using Xunit.v3;
 
 namespace TestOrderExamples.TestCaseOrdering;
 
-public class PriorityOrderer : ITestCaseOrderer
+public class PriorityOrderer : ITestMethodOrderer
 {
     static TValue GetOrCreate<TKey, TValue>(IDictionary<TKey, TValue> dictionary, TKey key)
         where TValue : new()
@@ -21,28 +21,27 @@ public class PriorityOrderer : ITestCaseOrderer
         return result;
     }
 
-    public IReadOnlyCollection<TTestCase> OrderTestCases<TTestCase>(IReadOnlyCollection<TTestCase> testCases)
-        where TTestCase : notnull, ITestCase
+    public IReadOnlyCollection<TTestMethod?> OrderTestMethods<TTestMethod>(IReadOnlyCollection<TTestMethod?> testMethods)
+        where TTestMethod : notnull, ITestMethod
     {
-        var result = new List<TTestCase>();
-        var sortedMethods = new SortedDictionary<int, List<IXunitTestCase>>();
+        var result = new List<TTestMethod?>();
+        var sortedMethods = new SortedDictionary<int, List<IXunitTestMethod?>>();
 
-        foreach (IXunitTestCase testCase in testCases)
+        foreach (IXunitTestMethod? testMethod in testMethods)
         {
             var priority = 0;
-            var attr = testCase.TestMethod.Method.GetCustomAttributes<TestPriorityAttribute>().FirstOrDefault();
-            if (attr is not null)
+            if (testMethod?.Method.GetCustomAttributes<TestPriorityAttribute>().FirstOrDefault() is { } attr)
                 priority = attr.Priority;
 
-            GetOrCreate(sortedMethods, priority).Add(testCase);
+            GetOrCreate(sortedMethods, priority).Add(testMethod);
         }
 
         foreach (var list in sortedMethods.Keys.Select(priority => sortedMethods[priority]))
         {
-            list.Sort((x, y) => StringComparer.OrdinalIgnoreCase.Compare(x.TestMethod.Method.Name, y.TestMethod.Method.Name));
+            list.Sort((x, y) => StringComparer.OrdinalIgnoreCase.Compare(x?.Method.Name, y?.Method.Name));
             for (var i = 0; i < list.Count; i++)
-                if (list[i] is TTestCase tTestCase)
-                    result.Add(tTestCase);
+                if (list[i] is TTestMethod tTestMethod)
+                    result.Add(tTestMethod);
         }
 
         return result;

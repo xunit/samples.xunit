@@ -23,6 +23,7 @@ public class RetryTestCase(
     IReadOnlyDictionary<string, IReadOnlyCollection<string>> traits,
     string uniqueID) :
         CodeGenTestCaseBase(
+            disableParallelization: false,  // [Theory.DisableParallelization] is fed into the test method registration
             @explicit,
             skipExceptions,
             skipReason,
@@ -58,9 +59,11 @@ public class RetryTestCase(
     public async ValueTask<RunSummary> Run(
         ExplicitOption explicitOption,
         IMessageBus messageBus,
-        FixtureMappingManager methodFixtureMappings,
         ExceptionAggregator aggregator,
-        CancellationTokenSource cancellationTokenSource)
+        CancellationTokenSource cancellationTokenSource,
+        ParallelMode parallelMode,
+        ExecutionScheduler scheduler,
+        FixtureMappingManager methodFixtureMappings)
     {
         var tests = await CreateTests();
 
@@ -73,6 +76,8 @@ public class RetryTestCase(
             TestCaseDisplayName,
             SkipReason,
             cancellationTokenSource,
+            parallelMode,
+            scheduler,
             methodFixtureMappings
         );
     }

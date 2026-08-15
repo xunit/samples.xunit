@@ -49,18 +49,22 @@ public class RetryTestCase : XunitTestCase, ISelfExecutingXunitTestCase
         ExplicitOption explicitOption,
         IMessageBus messageBus,
         object?[] constructorArguments,
-        FixtureMappingManager methodFixtureMappings,
         ExceptionAggregator aggregator,
-        CancellationTokenSource cancellationTokenSource) =>
+        CancellationTokenSource cancellationTokenSource,
+        ParallelMode parallelMode,
+        ExecutionScheduler scheduler,
+        FixtureMappingManager methodFixtureMappings) =>
             RetryTestCaseRunner.Instance.Run(
                 MaxRetries,
                 this,
+                explicitOption,
                 messageBus,
                 aggregator.Clone(),
-                cancellationTokenSource,
                 TestCaseDisplayName,
                 SkipReason,
-                explicitOption,
+                cancellationTokenSource,
+                parallelMode,
+                scheduler,
                 constructorArguments,
                 methodFixtureMappings
             );

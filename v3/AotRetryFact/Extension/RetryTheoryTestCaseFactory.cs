@@ -69,6 +69,7 @@ public class RetryTheoryTestCaseFactory : TheoryTestCaseFactory
             testDisplayName,
             [
                 async testCase => [new CodeGenTest(
+                    disableParallelization: false,  // [Theory.DisableParallelization] is fed into the test method registration
                     dataRow.Explicit ?? Explicit,
                     methodInvoker,
                     skipReason,
