@@ -15,9 +15,6 @@ public class ObservationExecutor(ObservationTestAssembly testAssembly) :
 {
     public new ObservationTestAssembly TestAssembly { get; } = testAssembly;
 
-    protected override ITestFrameworkDiscoverer CreateDiscoverer() =>
-        new ObservationDiscoverer(TestAssembly);
-
     public override async ValueTask RunTestCases(
         IReadOnlyCollection<ITestCase> testCases,
         IMessageSink executionMessageSink,

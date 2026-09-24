@@ -9,9 +9,6 @@ namespace NamespaceParallelization.Extensions;
 public class NamespaceParallelizationTestExecutor(IXunitTestAssembly testAssembly) :
     XunitTestFrameworkExecutor(testAssembly)
 {
-    protected override ITestFrameworkDiscoverer CreateDiscoverer() =>
-        new NamespaceParallelizationTestDiscoverer(TestAssembly);
-
     public override async ValueTask RunTestCases(
         IReadOnlyCollection<IXunitTestCase> testCases,
         IMessageSink executionMessageSink,

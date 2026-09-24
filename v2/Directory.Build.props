@@ -1,10 +1,11 @@
 <Project>
 
   <PropertyGroup>
-    <MicrosoftNetTestSdkVersion>18.0.1</MicrosoftNetTestSdkVersion>
-    <XunitAnalyzersVersion>1.25.0</XunitAnalyzersVersion>
+    <MicrosoftNetTestSdkVersion>18.10.1</MicrosoftNetTestSdkVersion>
+    <XunitAnalyzersVersion>2.1.0</XunitAnalyzersVersion>
     <XunitVersion>2.9.3</XunitVersion>
-    <XunitRunnerVSVersion>[2.8.2,3.0.0)</XunitRunnerVSVersion>
+    <!-- Stuck to 2.x due to minimum target framework changes in later versions -->
+    <XunitRunnerVSVersion>[2.8.2]</XunitRunnerVSVersion>
   </PropertyGroup>
 
 </Project>
